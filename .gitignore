@@ -1,4 +1,4 @@
 .DS_Store
 incident_webscraper/__pycache__
 scraper/__pycache__
-incident_webscraper/secrets.py
+# incident_webscraper/secrets.py
