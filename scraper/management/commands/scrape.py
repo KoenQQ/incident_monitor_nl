@@ -5,15 +5,15 @@ import numpy as np
 import pandas as pd
 import requests as rq
 import cProfile
+from string import digits
 
 from bs4 import BeautifulSoup
 
 from scraper.models import Incidents
 
-
 class Command(BaseCommand):
     """custom commandline command that scrapes
-        title, description from livep2000 and pushes
+        title, description and more from livep2000 and pushes
         it to PostgreSQL db
         """
     help = "collect incidents"
@@ -47,18 +47,19 @@ class Command(BaseCommand):
             call.append([title, description, geo_lat, geo_long, pubDate])
             incidents_data = incidents_data.append(call)
         
-        incidents_data.rename(columns={ 0: "comment", 1: "monitorcode", 2:"latitude", 3:'longtitude', 4:'timestamp'}, inplace=True) 
+        incidents_data.rename(columns={ 0: "comment", 1: "monitorcode", 2:"latitude", 3:'longitude', 4:'timestamp'}, inplace=True) 
         incidents_data['emergency_service'] = ""
         incidents_data['priority_code'] = ""
+        incidents_data['veiligheidsregio'] = ""
         
         #fill emergency service column
         regex_medical = r'MKA'
         regex_fire = r'BRW'
         regex_police = r'Politie'
 
-        incidents_data['emergency_service'] = np.where(incidents_data['monitorcode'].str.contains(regex_medical), 'Medical', 
-            np.where(incidents_data['monitorcode'].str.contains(regex_fire), 'Fire brigade', 
-            np.where(incidents_data['monitorcode'].str.contains(regex_police), 'Police', 'unknown')))
+        incidents_data['emergency_service'] = np.where(incidents_data['monitorcode'].str.contains(regex_medical), 'ambu', 
+            np.where(incidents_data['monitorcode'].str.contains(regex_fire), 'br', 
+            np.where(incidents_data['monitorcode'].str.contains(regex_police), 'pol', 'unknown')))
         
 
         #clean up the entries a bit 
@@ -69,9 +70,9 @@ class Command(BaseCommand):
         incidents_data['latitude'] = incidents_data['latitude'].str.replace(r'<geo:lat>', '').str.replace(r'<\/geo:lat>', '')
         incidents_data['latitude'] = incidents_data['latitude'].astype(float)
 
-        incidents_data['longtitude'] = incidents_data['longtitude'].astype(str)
-        incidents_data['longtitude'] = incidents_data['longtitude'].str.replace(r'<geo:long>', '').str.replace(r'<\/geo:long>', '')
-        incidents_data['longtitude'] = incidents_data['longtitude'].astype(float)
+        incidents_data['longitude'] = incidents_data['longitude'].astype(str)
+        incidents_data['longitude'] = incidents_data['longitude'].str.replace(r'<geo:long>', '').str.replace(r'<\/geo:long>', '')
+        incidents_data['longitude'] = incidents_data['longitude'].astype(float)
         
         #fill priority_code column
         incidents_data['priority_code'] = np.where(incidents_data['comment'].str.contains(r'A1'), 'A1', 
@@ -90,34 +91,50 @@ class Command(BaseCommand):
             np.where(incidents_data['monitorcode'].str.contains(r'Persinformatie'), 'Persinformatie',
             'NaN'))))))))))))))
         
-        # #drop unknown values 
-        index_names = incidents_data[incidents_data['emergency_service'] == 'unknown']
-        print(index_names)
-        # incidents_data.drop(incidents_data[incidents_data['emergency_service'] == 'unknown'].index, inplace = True)
+        remove_digits = str.maketrans('', '', digits)
 
-
-
+        location_list = []
+        for e in incidents_data['monitorcode']:
+            code = str(e)
+            code = code.strip()
+            code = code.lower() 
+            code = code.translate(remove_digits)
+            code = code.replace('mka', '').replace('brw', '').replace('meldkamer', '').replace('(','').replace(')','')
+            code = code.replace('monitorcode', '').replace('ambulance', '').replace('persinformatie', '').replace('lichtkrant', '')
+            code = code.replace('politie', '').replace('zorg', '').replace('groepscode', '').replace('monitor', '').replace('persvoorlichting', '')
+            code = code.replace('bevelvoerders', '').replace('infocode', '').replace('rws', '').replace('persinfo', '').replace(',', '')
+            code = code.replace('rapid responder', '').replace('ambu', '').replace(' - ', '').replace('ict functionaris', '')
+            code = code.replace('...', '').replace('mk','').replace('first responder', '').replace('ovd', '')
+            code = code[0:24]
+            code = code.strip()
+            seperator = '  '
+            code = code.split(seperator, 1)[0]
+            code = code.replace('-', ' ')
+            location_list.append(code)
+            # print(code)
+        
+        incidents_data['veiligheidsregio'] = location_list
+        
+        incidents_data = incidents_data.reset_index(drop=True)
 
         # incidents_data.to_excel('incident_example_data.xlsx') 
         # print('exported')
 
-        #     # check if url in db
-        # for s in incidents_data:
-        #     try:
-        #         # dit moet save to dataframe worden
-        #         # save in db
-        #         # must match Model
-        #         Incidents.objects.create(
-        #             title=title,
-        #             description = description if description is not None else " ",
-        #             message_code = 
-        #             emergency_service = 
-        #             geo_lat = geo_lat.text if geo_lat is not None else " ",
-        #             geo_long = geo_long.text if geo_long is not None else " ",
-        #             pubDate = pubDate
-        #             )
-        #         print('%s added' % (title,))
-        #     except:
-        #         print('%s could not add' % (title, ))
+            # check if title in db
+        for row in incidents_data.itertuples(): 
+            try:
+                Incidents.objects.create(
+                    comment=row.comment,
+                    monitorcode = row.monitorcode if row.monitorcode is not None else " ",
+                    priority_code = row.priority_code,
+                    emergency_service = row.emergency_service,
+                    latitude = row.latitude if row.latitude is not None else " ",
+                    longitude = row.longitude if row.longitude is not None else " ",
+                    region = row.veiligheidsregio,
+                    pubDate = row.timestamp
+                    )
+                print('%s added' % (row.comment))
+            except:
+                print('%s could not add' % (row.comment))
         
-        # self.stdout.write( 'job complete' )
+        self.stdout.write( 'job complete' )

@@ -1,41 +1,27 @@
 from django.db import models
+import uuid
 # from django.utils import timezone
 
 # Create your models here.
 
-
-# needed entries
-
-# title = titel
-# pubDate = publication date event
-# description = description of event. Locatie, welke hulpdienst
-# geolat = latitude
-# geolong = longitude
-
 class Incidents(models.Model):
     """Determines entry fields for scraper """
 
-    #hulpdienst opties
-    e_service_choices = (
-        ('br', 'brandweer'),
-        ('pol', 'politie'),
-        ('ambu', 'ambulance')
-    )
-
-
-    title = models.CharField(max_length=250, primary_key=True, unique=False)
-    description = models.CharField(max_length=250) #full description 
-    message_code = models.CharField(max_length=100) #hier ook optie lijst maken? 
-    emercency_service = models.CharField(max_length=100, choices = e_service_choices)
-    geo_lat = models.CharField(max_length=250, blank=True, null=True)  
-    geo_long = models.CharField(max_length=250, blank=True, null=True)
-    pubDate = models.CharField(max_length=250) 
+    monitorcode = models.CharField(max_length=250, primary_key=True) 
+    comment = models.CharField(max_length=250)
+    priority_code = models.CharField(max_length=100, null=True, blank=True) 
+    emercency_service = models.CharField(max_length=100, blank=True, null=True)
+    latitude = models.CharField(max_length=250, blank=True, null=True)  
+    longitude = models.CharField(max_length=250, blank=True, null=True)
+    region = models.CharField(max_length=250, blank=True, null=True)
+    pubDate = models.CharField(max_length=250, blank=True, null=True)
+    unique_code = models.UUIDField(default=uuid.uuid4, unique=True) 
 
     def __str__(self):
-        return self.title
+        return self.comment
 
     class Meta:
-        ordering = ['title']
+        ordering = ['comment']
 
     class Admin:
         pass
