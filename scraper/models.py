@@ -15,7 +15,6 @@ class Incidents(models.Model):
     longitude = models.CharField(max_length=250, blank=True, null=True)
     region = models.CharField(max_length=250, blank=True, null=True)
     pubDate = models.CharField(max_length=250, blank=True, null=True)
-    unique_code = models.UUIDField(default=uuid.uuid4, unique=True) 
 
     def __str__(self):
         return self.comment
