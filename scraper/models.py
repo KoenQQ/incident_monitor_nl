@@ -10,7 +10,7 @@ class Incidents(models.Model):
     monitorcode = models.CharField(max_length=250, primary_key=True) 
     comment = models.CharField(max_length=250)
     priority_code = models.CharField(max_length=100, null=True, blank=True) 
-    emercency_service = models.CharField(max_length=100, blank=True, null=True)
+    emergency_service = models.CharField(max_length=100, blank=True, null=True)
     latitude = models.CharField(max_length=250, blank=True, null=True)  
     longitude = models.CharField(max_length=250, blank=True, null=True)
     region = models.CharField(max_length=250, blank=True, null=True)

@@ -120,16 +120,17 @@ class Command(BaseCommand):
         # incidents_data.to_excel('incident_example_data.xlsx') 
         # print('exported')
 
+
             # check if title in db
         for row in incidents_data.itertuples(): 
             try:
                 Incidents.objects.create(
-                    comment=row.comment,
-                    monitorcode = row.monitorcode if row.monitorcode is not None else " ",
+                    monitorcode = row.monitorcode,
+                    comment = row.comment,
                     priority_code = row.priority_code,
                     emergency_service = row.emergency_service,
-                    latitude = row.latitude if row.latitude is not None else " ",
-                    longitude = row.longitude if row.longitude is not None else " ",
+                    latitude = row.latitude,
+                    longitude = row.longitude,
                     region = row.veiligheidsregio,
                     pubDate = row.timestamp
                     )
@@ -138,3 +139,15 @@ class Command(BaseCommand):
                 print('%s could not add' % (row.comment))
         
         self.stdout.write( 'job complete' )
+
+
+#  Incidents.objects.create(
+#                     comment=row.comment,
+#                     monitorcode = row.monitorcode if row.monitorcode is not None else " ",
+#                     priority_code = row.priority_code,
+#                     emergency_service = row.emergency_service,
+#                     latitude = row.latitude if row.latitude is not None else " ",
+#                     longitude = row.longitude if row.longitude is not None else " ",
+#                     region = row.veiligheidsregio,
+#                     pubDate = row.timestamp
+#                     )
