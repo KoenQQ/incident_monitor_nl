@@ -1,0 +1,18 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>incidenten binnen punt radius</title>
+    </head>
+<body>
+    <h1>incidents within range</h1>
+    {% if Incidents %}
+    <ul>
+    {% for incidents in Incidents %}
+        <li>
+        {{ Incidents.monitorcode }}: {{Incidence.distance}}
+        </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

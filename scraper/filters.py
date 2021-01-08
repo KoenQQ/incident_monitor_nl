@@ -10,5 +10,5 @@ class IncidentsFilter(django_filters.FilterSet):
     class Meta:
         model = Incidents
         fields = ['monitorcode', 'comment', 'priority_code', 'emergency_service', 
-                'latitude', 'longitude', 'region', 'pubDate' ]
+                'latitude', 'longitude', 'region', 'pub_date', 'incident_hash' ]
 

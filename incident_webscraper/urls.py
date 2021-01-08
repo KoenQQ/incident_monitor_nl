@@ -20,7 +20,7 @@ from scraper import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('scraper.urls')),
+
     # path('', views.index)
 ]
 
-# locatie op schijf: C:\Users\koen\app_dev\incident_webscraper

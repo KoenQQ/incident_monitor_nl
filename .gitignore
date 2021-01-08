@@ -1,7 +1,15 @@
 .DS_Store
 incident_webscraper/__pycache__
 scraper/__pycache__
+scraper/management/commands/__pycache__
 incident_webscraper/secrets.py
+scraper/migrations
 .env
 vb.xml
 cd
+.venv/ 
+.vscode/
+activate
+exit
+quit
+Dockerfile

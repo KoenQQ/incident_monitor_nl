@@ -6,10 +6,14 @@ import pandas as pd
 import requests as rq
 import cProfile
 from string import digits
-
+import re
+from datetime import datetime
 from bs4 import BeautifulSoup
-
+from django.contrib.gis.geos import Point
+from django.contrib.gis.geos import fromstr
 from scraper.models import Incidents
+import zlib
+
 
 class Command(BaseCommand):
     """custom commandline command that scrapes
@@ -41,8 +45,7 @@ class Command(BaseCommand):
             description = i.find('description').text
             geo_lat = i.find('geo:lat')
             geo_long = i.find('geo:long')
-            pubDate = i.find('pubdate').text 
-            
+            pubDate = i.find('pubdate').text
             call.append([title, description, geo_lat, geo_long, pubDate])
             incidents_data = incidents_data.append(call)
         
@@ -67,11 +70,15 @@ class Command(BaseCommand):
         
         incidents_data['latitude'] = incidents_data['latitude'].astype(str)
         incidents_data['latitude'] = incidents_data['latitude'].str.replace(r'<geo:lat>', '').str.replace(r'<\/geo:lat>', '')
+        incidents_data['latitude'] = incidents_data['latitude'].str.replace(r'None', 'NaN')
         incidents_data['latitude'] = incidents_data['latitude'].astype(float)
 
         incidents_data['longitude'] = incidents_data['longitude'].astype(str)
         incidents_data['longitude'] = incidents_data['longitude'].str.replace(r'<geo:long>', '').str.replace(r'<\/geo:long>', '')
+        incidents_data['longitude'] = incidents_data['longitude'].str.replace(r'None', 'NaN')
         incidents_data['longitude'] = incidents_data['longitude'].astype(float)
+
+        
         
         #fill priority_code column
         incidents_data['priority_code'] = np.where(incidents_data['comment'].str.contains(r'A1'), 'A1', 
@@ -92,6 +99,7 @@ class Command(BaseCommand):
         
         remove_digits = str.maketrans('', '', digits)
 
+        #clean up locations
         location_list = []
         for e in incidents_data['monitorcode']:
             code = str(e)
@@ -113,10 +121,49 @@ class Command(BaseCommand):
         
         incidents_data['veiligheidsregio'] = location_list
         
+        #update naar datetime format
+        datetime_list = []
+        for e in incidents_data['timestamp']:
+            datetime_str = e
+            date_object = datetime.strptime(datetime_str, "%a, %d %b %Y %H:%M:%S  %z")
+            datetime_list.append(date_object)
+        incidents_data['timestamp'] = datetime_list
+
+        #add hash to check against db
+        hash_list = []
+        for r in incidents_data.itertuples():
+            monitor = r.monitorcode
+            comment = r.comment
+            date = str(r.timestamp)
+            date = date[:19]
+            hash_local = str(monitor + comment + date)
+            hash_local = hash_local.replace(' ', '')
+            hash_local = bytes(hash_local, encoding='utf-8')
+            hash_local = zlib.crc32(hash_local)
+            hash_list.append(hash_local)
+            
+        incidents_data['incident_hash'] = hash_list
+
+        #index reset
         incidents_data = incidents_data.reset_index(drop=True)
 
-        for row in incidents_data.itertuples(): 
-            try:
+        # export naar excel voor scraper uitkomst test
+        # incidents_data.to_excel("incident_data.xlsx")
+
+        #check if hash exists, if not push to db
+        added_new = 0
+        existing = 0
+
+        for row in incidents_data.itertuples():
+            hash_row = row.incident_hash
+            lat_use = float(row.latitude)
+            lon_use = float(row.longitude)
+            if Incidents.objects.filter(incident_hash = hash_row).exists():
+                # desgewenst aanzetten
+                # print('%s exists' % (row.monitorcode))
+                existing += 1
+                continue
+            else:
                 Incidents.objects.create(
                     monitorcode = row.monitorcode,
                     comment = row.comment,
@@ -124,11 +171,14 @@ class Command(BaseCommand):
                     emergency_service = row.emergency_service,
                     latitude = row.latitude,
                     longitude = row.longitude,
+                    location = fromstr('POINT({} {})'.format(lon_use, lat_use), srid=4326),
                     region = row.veiligheidsregio,
-                    pubDate = row.timestamp
-                    )
-                print('%s added' % (row.comment))
-            except:
-                print('%s could not add' % (row.comment))
-        
-        self.stdout.write( 'job complete' )
+                    pub_date = row.timestamp,
+                    incident_hash = row.incident_hash
+                    ) 
+                # desgewenst aanzetten
+                # print('%s added' % (row.monitorcode))
+                added_new += 1
+                continue
+            
+        self.stdout.write( 'job complete. Added {} new entries, {} entries existed'.format(added_new, existing) )
