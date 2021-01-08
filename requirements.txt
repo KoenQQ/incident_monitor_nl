@@ -27,4 +27,4 @@ sqlparse==0.4.1
 urllib3==1.26.2
 whitenoise==5.2.0
 zope.interface==5.2.0
-GDAL==3.2.1
+# GDAL==3.2.1
