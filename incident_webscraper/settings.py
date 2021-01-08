@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'incident_webscraper.wsgi.application'
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 
 
@@ -137,6 +138,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
+
 
 # GDAL_LIBRARY_PATH = '/home/sue/local/lib/libgdal.so'
 
