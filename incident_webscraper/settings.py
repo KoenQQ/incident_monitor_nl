@@ -138,6 +138,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
 #
 
 # GDAL_LIBRARY_PATH = '/home/sue/local/lib/libgdal.so'
