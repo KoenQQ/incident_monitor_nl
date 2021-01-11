@@ -7,9 +7,19 @@ import django_filters
 from django.views.generic import TemplateView
 
 
+#API 
 class IncidentsViewSet(viewsets.ModelViewSet):
     queryset = Incidents.objects.all().order_by('monitorcode')
     serializer_class = IncidentsSerializer
+
+# #API aansluiting maken die alle objecten binnen bepaalde afstand retourneerd als een (geo)json file.
+# class NearbyIncidents(generic.ListView):
+#     model = Incidents
+#     context_object_name = 'incident'
+#     queryset = Incidents.objects.annotate(distance=Distance('location',
+#     user_location) #user_location = locatie uit reactapp
+#     ).order_by('distance')[0:6]
+#     template_name = 'distance.html' #deze verwijzen naar de reactapp 
 
 
 # next step: beter frontend
@@ -36,10 +46,3 @@ class MapView(TemplateView):
 #         user_location)).order_by('distance')[0:6]
 #         template_name = 'test.tml'
 
-# class NearbyIncidents(generic.ListView):
-#     model = Incidents
-#     context_object_name = 'shops'
-#     queryset = Incidents.objects.annotate(distance=Distance('location',
-#     user_location)
-#     ).order_by('distance')[0:6]
-#     template_name = 'distance.html'

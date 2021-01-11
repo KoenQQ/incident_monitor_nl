@@ -14,11 +14,11 @@ class Incidents(models.Model):
     comment = models.CharField(max_length=300, null=True, blank=True)
     priority_code = models.CharField(max_length=100, null=True, blank=True) 
     emergency_service = models.CharField(max_length=100, blank=True, null=True)
-    latitude = models.CharField(max_length=250, blank=True, null=True)  
-    longitude = models.CharField(max_length=250, blank=True, null=True)
+    latitude = models.CharField(max_length=253, blank=True, null=True)  
+    longitude = models.CharField(max_length=252, blank=True, null=True)
     location = gis_models.PointField(default=Point(0, 0), blank=True)
-    region = models.CharField(max_length=250, blank=True, null=True)
-    pub_date = models.DateTimeField(max_length=250, blank=True, null=True)
+    region = models.CharField(max_length=248, blank=True, null=True)
+    pub_date = models.DateTimeField(max_length=249, blank=True, null=True)
     incident_hash = models.CharField(max_length=20, primary_key=True, blank=True)
 
     def __str__(self):

@@ -20,6 +20,7 @@ from scraper import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('scraper.urls')),
+    #path('', include('app.urls')) dit wordt het path van de frontend app. scraper app komt dan aan andere url 
 
     # path('', views.index)
 ]
