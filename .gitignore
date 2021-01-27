@@ -13,7 +13,7 @@ activate
 exit
 quit
 Dockerfile
-frontend/static
+# frontend/static
 frontend/node_modules
 node_modules
 frontend/__pycache__
