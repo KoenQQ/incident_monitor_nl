@@ -10,7 +10,7 @@ import uuid
 class Incidents(models.Model):
     """database fields"""
 
-    monitorcode = models.CharField(max_length=1000, null=True, blank=True) 
+    monitorcode = models.CharField(max_length=2000, null=True, blank=True) 
     comment = models.CharField(max_length=300, null=True, blank=True)
     priority_code = models.CharField(max_length=100, null=True, blank=True) 
     emergency_service = models.CharField(max_length=100, blank=True, null=True)

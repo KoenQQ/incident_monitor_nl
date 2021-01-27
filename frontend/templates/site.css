@@ -1,0 +1,106 @@
+.sidebarStyle {
+    display: inline-block;
+    position: absolute;
+    top: 110px;
+    left: 0;
+    margin: 12px;
+    background-color: #2A3C47;
+    color: #ffffff;
+    z-index: 1 !important;
+    padding: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: medium;
+    font-size: medium;
+}
+.locationStyle {
+    display: inline-block;
+    position: absolute;
+    top: 200;
+    left: 0;
+    margin: 12px;
+    background-color: #2A3C47;
+    color: #ffffff;
+    z-index: 1 !important;
+    padding: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+.mapContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.headerStyle{
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    margin: 12px;
+    background-color: #2A3C47;
+    color: #ffffff;
+    z-index: 1 !important;
+    padding: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: lighter;
+    font-size: 40px;
+}
+
+.introbarStyle{
+    display: inline-block;
+    position: absolute;
+    top: 74px;
+    left: 0px;
+    margin: 12px;
+    background-color: #2A3C47;
+    color: #ffffff;
+    z-index: 1 !important;
+    padding: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: medium;
+    font-size: medium;
+}
+
+.mapboxgl-popup-content {
+    background-color: #2A3C47;
+    color: #ffffff;
+  }
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+    border-bottom-color: #2A3C47;
+    }
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+    border-top-color: #2A3C47;
+    }
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: #2A3C47;
+    }
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: #2A3C47;
+    }
+
+.mapboxgl-popup-close-button {
+    color: #ffffff;
+}
+
+.carthaBar {
+    
+    position: absolute;
+    top: 900px;
+    left: 650px;
+    margin: 12px;
+    padding: 6px;
+    z-index: 1 !important;
+    /* background-color: #2A3C47; */
+    color: #2A3C47;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: medium;
+}

@@ -33,7 +33,7 @@ if os.path.exists(dotenv_file):
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'rest_framework',
     'django_filters',
+    'frontend',
+    'webpack_loader'
 ]
 
 MIDDLEWARE = [
@@ -65,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'incident_webscraper.urls'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 TEMPLATES = [
     {
@@ -81,6 +85,14 @@ TEMPLATES = [
         },
     },
 ]
+
+# WEBPACK_LOADER = {
+#   'DEFAULT': {
+#     'BUNDLE_DIR_NAME': 'frontend/',
+#     'STATS_FILE': os.path.join(BASE_DIR, 'frontend/webpack-stats.json')
+#   }
+# }
+
 
 WSGI_APPLICATION = 'incident_webscraper.wsgi.application'
 
@@ -124,7 +136,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -136,13 +148,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
-#
 
-# GDAL_LIBRARY_PATH = '/home/sue/local/lib/libgdal.so'
-
-
-# DATABASES = {'default': dj_database_url.config(default=os.environ["DATABASE_URL"])}

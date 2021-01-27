@@ -18,9 +18,10 @@ from django.urls import path, include
 from scraper import views
 
 urlpatterns = [
+    path('', include('frontend.urls')), 
     path('admin/', admin.site.urls),
-    path('', include('scraper.urls')),
-    #path('', include('app.urls')) dit wordt het path van de frontend app. scraper app komt dan aan andere url 
+    path('scraper/', include('scraper.urls'))
+    
 
     # path('', views.index)
 ]

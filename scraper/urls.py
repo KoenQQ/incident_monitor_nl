@@ -4,7 +4,8 @@ from . import views
 from scraper.views import MapView
 
 router = routers.DefaultRouter()
-router.register(r'Incidents', views.IncidentsViewSet)
+router.register(r'incidents', views.IncidentsViewSet, basename='incidents')
+router.register(r'location', views.NearbyIncidents, basename='location')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
