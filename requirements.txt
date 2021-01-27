@@ -11,7 +11,7 @@ django-heroku==0.3.1
 django-webpack-loader==0.7.0
 djangorestframework==3.12.2
 et-xmlfile==1.0.1
-# GDAL==3.2.1
+# GDAL==3.2.1 [niet nodig]
 gunicorn==20.0.4
 idna==2.10
 jdcal==1.4.1
