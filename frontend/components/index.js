@@ -46,7 +46,7 @@ class Application extends React.Component {
         .setText("Location: " + event.lngLat)
         .addTo(map)
 
-      axios.get('http://127.0.0.1:8000/scraper/api/location/', {
+      axios.get('https://incident-monitor-nl.herokuapp.com/scraper/api/location/', {
         params: {
           'location-list': `SRID=4326;POINT(${lng} ${lat})`
         }
