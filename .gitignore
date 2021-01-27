@@ -17,3 +17,4 @@ frontend/static
 frontend/node_modules
 node_modules
 frontend/__pycache__
+staticfiles
