@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom'
 import mapboxgl, { LngLat } from 'mapbox-gl';
 import * as axios from 'axios';
 import "/templates/site.css"
-import GeoJSON from 'geojson'
 
 // test
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2RlYnJhdXciLCJhIjoiY2p4ZnhyaTUzMDB1eTQxbnVwOG9jbHBwdSJ9.L5RCSfMVV7RYpq1a45E68g';
