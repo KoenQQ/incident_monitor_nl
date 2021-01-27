@@ -163,7 +163,7 @@ class Application extends React.Component {
       }
       
       console.log(geojson)
-      // window.CP.exitedLoop(1);
+      // window.CP.exitedLoop(1); test
       // var parsed = GeoJSON.parse(file, {Point: ['fields.latitude', 'fields.longitude']})
       return geojson
     };
