@@ -43,7 +43,7 @@ class Application extends React.Component {
         color: "#2A3C47"
         })
         .setLngLat(event.lngLat)
-        .setText("Location: " + event.lngLat)
+        .setText("What happened here in <br> the last 30 days?")
         .addTo(map)
 
         // localhost: 'http://127.0.0.1:8000/scraper/api/location/'
