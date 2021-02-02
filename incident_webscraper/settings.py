@@ -40,8 +40,8 @@ ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
        'http://127.0.0.1:8000', 
-       'https://incident-monitor-nl.herokuapp.com/', 
-       'http://www.incidentradar.com/'
+       'https://incident-monitor-nl.herokuapp.com', 
+       'http://www.incidentradar.com'
 )
 
 # Application definition
