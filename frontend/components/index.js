@@ -46,6 +46,8 @@ class Application extends React.Component {
         .setText("Location: " + event.lngLat)
         .addTo(map)
 
+        // localhost: 'http://127.0.0.1:8000/scraper/api/location/'
+        // productie: 'https://incident-monitor-nl.herokuapp.com/scraper/api/location/'
       axios.get('https://incident-monitor-nl.herokuapp.com/scraper/api/location/', {
         params: {
           'location-list': `SRID=4326;POINT(${lng} ${lat})`
@@ -101,6 +103,7 @@ class Application extends React.Component {
           var comment = e.features[0].properties.comment;
           var emergency_service = e.features[0].properties.emergency_service;
           var priority_code = e.features[0].properties.priority_code;
+          var pub_date = e.features[0].properties.pub_date;
           
           // console.log(coordinates);
           console.log(monitorcode);
@@ -115,7 +118,7 @@ class Application extends React.Component {
           
           popup_extra
           .setLngLat(coordinates)
-          .setHTML('<H3> Incident </H3>' + 'MONITORCODE: ' + monitorcode + ' COMMENT: ' + comment)
+          .setHTML('<H3> Incident </H3>' + pub_date + '<br> <br> Priority: ' + priority_code + '<br> <br> Message: ' + comment)
           .addTo(map);
 
           

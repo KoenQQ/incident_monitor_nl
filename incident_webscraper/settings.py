@@ -35,29 +35,36 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://127.0.0.1:8000/', 'https://incident-monitor-nl.herokuapp.com/']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp.com/', 'http://www.incidentradar.com/']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    #django native
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'scraper.apps.ScraperConfig',
     'django.contrib.gis',
+
+    #third party
+    'corsheaders',
     'rest_framework',
     'django_filters',
+    'webpack_loader',
+
+    #local apps
+    'scraper.apps.ScraperConfig',
     'frontend',
-    'webpack_loader'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
