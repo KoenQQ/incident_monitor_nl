@@ -69,7 +69,7 @@ class Application extends React.Component {
         params: {
           'dateRange': this.state.dateRange,
           'location-list': `SRID=4326;POINT(${lng} ${lat})`,
-          // 'searchRange': this.state.searchRange
+          'searchRange': this.state.searchRange
         }
       }).then(results => { 
         this.results = results.data
