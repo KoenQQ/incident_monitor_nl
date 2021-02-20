@@ -1,5 +1,8 @@
 
 
+const webpack = require('webpack')
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
+
 module.exports = {
     module: {
       rules: [
@@ -16,5 +19,17 @@ module.exports = {
             use: ["style-loader", "css-loader"],
           },
       ]
-    }
+    },
+    plugins: [
+      new NodePolyfillPlugin(),
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'process.env.NODE_DEBUG': JSON.stringify(process.env.NODE_DEBUG),
+        'process.type': JSON.stringify(process.type),
+        'process.version': JSON.stringify(process.version),
+      }),
+    ]
   };

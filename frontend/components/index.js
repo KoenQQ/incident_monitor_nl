@@ -1,24 +1,40 @@
 
 
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import mapboxgl, { LngLat } from 'mapbox-gl';
 import * as axios from 'axios';
-import "/templates/site.css"
+import "/templates/site.css";
+import FilterSelector from './FilterSelector.js';
 
-// test
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2RlYnJhdXciLCJhIjoiY2p4ZnhyaTUzMDB1eTQxbnVwOG9jbHBwdSJ9.L5RCSfMVV7RYpq1a45E68g';
 
 class Application extends React.Component {
-  // deze kan later nog in eigen doc komen
   constructor(props) {
     super(props);
+    // this.handleSearchRangeChange = this.handleSearchRangeChange.bind(this);
+    // this.handleDateRangehange = this.handleDateRangeChange.bind(this)
     this.state = {
       lng: 5.8,
       lat: 52,
-      zoom: 7
+      zoom: 7,
+      searchRange: 1,
+      dateRange: 30,
+      array: 0
     };
+    this.handleDateRangeChange = this.handleDateRangeChange.bind(this)
+    this.handleSearchRangeChange = this.handleSearchRangeChange.bind(this)
   }
+
+  //functions to handle changes in filter sliders 
+  handleDateRangeChange(value) {
+    this.setState({dateRange: value});
+  };
+
+  handleSearchRangeChange(value) {
+    this.setState({searchRange: value});
+  };
 
   componentDidMount() {
     const map = new mapboxgl.Map({
@@ -39,26 +55,31 @@ class Application extends React.Component {
     map.on('click', event => {
       const { lat, lng } = event.lngLat;
       
+
       new mapboxgl.Popup({
         color: "#2A3C47"
         })
         .setLngLat(event.lngLat)
-        .setText("What happened here in the last 30 days?")
+        .setText('What happened here in the last ' + this.state.dateRange + ' days?')
         .addTo(map)
 
         // localhost: 'http://127.0.0.1:8000/scraper/api/location/'
-        // productie: 'https://incident-monitor-nl.herokuapp.com/scraper/api/location/'
+        // production: 'https://incident-monitor-nl.herokuapp.com/scraper/api/location/'
       axios.get('https://incident-monitor-nl.herokuapp.com/scraper/api/location/', {
         params: {
-          'location-list': `SRID=4326;POINT(${lng} ${lat})`
+          'dateRange': this.state.dateRange,
+          'location-list': `SRID=4326;POINT(${lng} ${lat})`,
+          // 'searchRange': this.state.searchRange
         }
       }).then(results => { 
         this.results = results.data
-        console.log(results.data)
         console.log(jsonToGeoJson(results.data))
         
+        //update this.state.array with query number results
+        this.state.array = this.results.length
+        
+        // if layer exists remove old one
         if (map.getSource('locaties')) {
-          // if layer exists remove old one
           map.removeLayer('locaties_waddan');      
           map.removeSource('locaties');
         };
@@ -66,10 +87,10 @@ class Application extends React.Component {
         map.addSource('locaties', {
           type: 'geojson',
           data: jsonToGeoJson(results.data),
-        })
+        });
       
         
-
+        
         map.addLayer({
           'id': 'locaties_waddan',
           'type': 'circle',
@@ -94,7 +115,7 @@ class Application extends React.Component {
           }
 
         });
- 
+        
         map.on('mouseenter', 'locaties_waddan', function(e) {
           map.getCanvas().style.cursor = 'pointer';
 
@@ -135,6 +156,9 @@ class Application extends React.Component {
 
     });
 
+// test 
+
+
     function jsonToGeoJson(e) {
       
       var geojson = {
@@ -163,8 +187,8 @@ class Application extends React.Component {
           }
         });
       }
-      
-      console.log(geojson)
+      //hallo
+
       // window.CP.exitedLoop(1); test
       // var parsed = GeoJSON.parse(file, {Point: ['fields.latitude', 'fields.longitude']})
       return geojson
@@ -175,23 +199,38 @@ class Application extends React.Component {
       closeOnClick: false
     });
 
+
   }
 
 
   render() {
     return (
       <div>
-        <div className='headerStyle'>
-          <div>Incidentradar</div>
+        <div>           
         </div>
-        <div className='sidebarStyle'>
-          <div>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</div>
-        </div>
-        <div className='carthaBar'>
-          <div>Designed and powered by Cartha</div>
-        </div>
-        <div className='introbarStyle'>
-          <div>Click on the map to explore recent incidents </div>
+        <div className='dataHolder'>
+          <div className='headerStyle'>
+            <div>Incidentradar</div>
+          </div>
+          <div className='introbarStyle'>
+            <div>Click on the map to explore recent incidents in an area </div>
+          </div>
+          <div className='hline'/>
+          <div className='filterStyle'> 
+            <FilterSelector 
+            searchRanged = {this.state.searchRange}
+            dateRanged = {this.state.dateRange}
+            searchRangeChange = {this.handleSearchRangeChange}
+            dateRangeChange={this.handleDateRangeChange} 
+            /> 
+          </div>
+          <div className='sidebarStyle'>
+            <div>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</div>
+            <div> Your click returned {this.state.array} results </div>
+          </div>
+          <div className='carthaBar'>
+            <div>Designed and powered by Cartha</div>
+          </div>
         </div>
         <div ref={el => this.mapContainer = el} className='mapContainer' />
       </div>

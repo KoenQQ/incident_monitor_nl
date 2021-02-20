@@ -12,10 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
+    "path-browserify": "^1.0.1",
+    "process": "0.11.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "source-map-loader": "^2.0.0",
@@ -24,8 +27,13 @@
     "webpack-cli": "^4.3.1"
   },
   "dependencies": {
+    "antd": "^4.11.2",
     "axios": "^0.21.1",
     "mapbox-gl": "^2.0.1",
+    "node-polyfill-webpack-plugin": "^1.0.2",
+    "query-string": "^6.14.0",
+    "react-compound-slider": "^3.3.1",
+    "rsuite": "^4.8.9",
     "source-map-loader": "^2.0.0"
   }
 }
