@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 from . import views
-from scraper.views import MapView, current_user, UserList
+from scraper.views import MapView, UserList 
 
 router = routers.DefaultRouter()
 router.register(r'incidents', views.IncidentsViewSet, basename='incidents')
@@ -14,7 +14,7 @@ urlpatterns = [
     path('', MapView.as_view()),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('current_user/', current_user),
+    # path('current_user/', current_user),
     path('users/', UserList.as_view())
 ]
 
