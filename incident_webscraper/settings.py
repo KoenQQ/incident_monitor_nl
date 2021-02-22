@@ -96,7 +96,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
     #     'rest_framework.authentication.SessionAuthentication',
     #     'rest_framework.authentication.BasicAuthentication',
     # ),
-}
+# }
 
 # JWT_AUTH = {
 #     'JWT_RESPONSE_PAYLOAD_HANDLER': 'incident_webscraper.utils.my_jwt_response_handler'
