@@ -39,6 +39,15 @@ class IncidentsViewSet(viewsets.ModelViewSet):
     queryset = Incidents.objects.all().order_by('monitorcode')
     serializer_class = IncidentsSerializer
 
+def return_degrees(e):
+        km = e
+        degrees_range =[]
+        for kilometers, degrees in distance_key.items():
+            if kilometers == km:
+                degrees_range = degrees
+        return degrees_range
+
+
 #Filter aan te roepen vanuit frontend
 # op basis van locatie, tijd en reiwijdte 
 class NearbyIncidents(viewsets.ModelViewSet):
@@ -69,14 +78,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
         10: 0.09
         }
 
-    def return_degrees(e):
-        km = e
-        degrees_range =[]
-        for kilometers, degrees in distance_key.items():
-            if kilometers == km:
-                degrees_range = degrees
-        return degrees_range
-
+    
     def list(self, request, **kwargs):
         lat = 52.4
         lng = 4.9
@@ -86,7 +88,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
         point = self.request.GET.get('location-list') 
         searchRange = self.request.GET.get('searchRange')
         searchRange = int(searchRange)
-        searchRange = return_degrees(searchRange)
+        # searchRange = return_degrees(searchRange)
         print(searchRange)
          # point = Point(lng, lat) #gebruik voor hardcode locatie       
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, 0.009))
