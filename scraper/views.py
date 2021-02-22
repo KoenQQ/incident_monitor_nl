@@ -47,26 +47,26 @@ class NearbyIncidents(viewsets.ModelViewSet):
     serializer_class = IncidentsSerializer
 
     distance_key = {
-        0.5: 0.00045,
-        1: 0.0009,
-        1.5: 0.00135,
-        2: 0.0018,
-        2.5: 0.00225,
-        3: 0.0027,
-        3.5: 0.00315,
-        4: 0.0036,
-        4.5: 0.00405,
-        5: 0.0045,
-        5.5: 0.00495,
-        6: 0.0054,
-        6.5: 0.00585,
-        7: 0.0063,
-        7.5: 0.00675,
-        8: 0.0072,
-        8.5: 0.00765,
-        9: 0.0081,
-        9.5: 0.00855,
-        10: 0.009
+        0.5: 0.0045,
+        1: 0.009,
+        1.5: 0.0135,
+        2: 0.018,
+        2.5: 0.0225,
+        3: 0.027,
+        3.5: 0.0315,
+        4: 0.036,
+        4.5: 0.0405,
+        5: 0.045,
+        5.5: 0.0495,
+        6: 0.054,
+        6.5: 0.0585,
+        7: 0.063,
+        7.5: 0.0675,
+        8: 0.072,
+        8.5: 0.0765,
+        9: 0.081,
+        9.5: 0.0855,
+        10: 0.09
         }
 
     def return_degrees(e):
@@ -85,7 +85,8 @@ class NearbyIncidents(viewsets.ModelViewSet):
         dateRange = int(dateRange)
         point = self.request.GET.get('location-list') 
         searchRange = self.request.GET.get('searchRange')
-        # searchRange = return_degrees(searchRange)
+        searchRange = in(searchRange)
+        searchRange = return_degrees(searchRange)
         print(searchRange)
          # point = Point(lng, lat) #gebruik voor hardcode locatie       
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, 0.009))
