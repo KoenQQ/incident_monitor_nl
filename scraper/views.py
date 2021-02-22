@@ -85,8 +85,9 @@ class NearbyIncidents(viewsets.ModelViewSet):
         point = self.request.GET.get('location-list') 
         searchRange = self.request.GET.get('searchRange')
         searchRange = return_degrees(searchRange)
+        print(searchRange)
          # point = Point(lng, lat) #gebruik voor hardcode locatie       
-        queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange))
+        queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, 0.0015))
         recent_incidents_list = queryset
         updated_incidents_list = serializers.serialize("json", recent_incidents_list)
         return HttpResponse(updated_incidents_list)
