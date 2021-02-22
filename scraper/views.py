@@ -82,6 +82,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
         lng = 4.9
         #filter uit url
         dateRange = self.request.GET.get('dateRange')
+        dateRange = int(dateRange)
         point = self.request.GET.get('location-list') 
         searchRange = self.request.GET.get('searchRange')
         # searchRange = return_degrees(searchRange)
