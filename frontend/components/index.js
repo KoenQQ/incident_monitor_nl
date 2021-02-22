@@ -62,7 +62,7 @@ class Application extends React.Component {
         .setLngLat(event.lngLat)
         .setText('What happened here in the last ' + this.state.dateRange + ' days?')
         .addTo(map)
-
+        
         // localhost: 'http://127.0.0.1:8000/scraper/api/location/'
         // production: 'https://incident-monitor-nl.herokuapp.com/scraper/api/location/'
       axios.get('https://incident-monitor-nl.herokuapp.com/scraper/api/location/', {

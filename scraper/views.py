@@ -75,7 +75,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
             if kilometers == km:
                 degrees_range = degrees
         return degrees_range
-    
+
     def list(self, request, **kwargs):
         lat = 52.4
         lng = 4.9
@@ -96,14 +96,14 @@ class MapView(TemplateView):
     template_name = "map.html"
 
 
-@api_view(['GET'])
-def current_user(request):
-    """
-    Determine the current user by their token, and return their data
-    """
+# @api_view(['GET'])
+# def current_user(request):
+#     """
+#     Determine the current user by their token, and return their data
+#     """
     
-    serializer = UserSerializer(request.user)
-    return Response(serializer.data)
+#     serializer = UserSerializer(request.user)
+#     return Response(serializer.data)
 
 
 class UserList(APIView):
