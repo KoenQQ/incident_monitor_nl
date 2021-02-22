@@ -47,15 +47,7 @@ def return_degrees(e):
                 degrees_range = degrees
         return degrees_range
 
-
-#Filter aan te roepen vanuit frontend
-# op basis van locatie, tijd en reiwijdte 
-class NearbyIncidents(viewsets.ModelViewSet):
-    
-    model = Incidents
-    serializer_class = IncidentsSerializer
-
-    distance_key = {
+distance_key = {
         0.5: 0.0045,
         1: 0.009,
         1.5: 0.0135,
@@ -77,6 +69,15 @@ class NearbyIncidents(viewsets.ModelViewSet):
         9.5: 0.0855,
         10: 0.09
         }
+
+#Filter aan te roepen vanuit frontend
+# op basis van locatie, tijd en reiwijdte 
+class NearbyIncidents(viewsets.ModelViewSet):
+    
+    model = Incidents
+    serializer_class = IncidentsSerializer
+
+    
 
     
     def list(self, request, **kwargs):
