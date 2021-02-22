@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework import viewsets, permissions, status
-from scraper.serializers import IncidentsSerializer, UserSerializer, UserSerializerWithToken
+from scraper.serializers import IncidentsSerializer
+# from scraper.serializers import UserSerializer, UserSerializerWithToken
 from .models import Incidents
 import django_filters
 from django.views.generic import TemplateView
