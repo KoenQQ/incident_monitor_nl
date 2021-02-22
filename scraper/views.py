@@ -85,7 +85,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
         dateRange = int(dateRange)
         point = self.request.GET.get('location-list') 
         searchRange = self.request.GET.get('searchRange')
-        searchRange = in(searchRange)
+        searchRange = int(searchRange)
         searchRange = return_degrees(searchRange)
         print(searchRange)
          # point = Point(lng, lat) #gebruik voor hardcode locatie       
