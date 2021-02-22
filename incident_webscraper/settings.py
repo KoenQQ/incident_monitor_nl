@@ -98,9 +98,9 @@ REST_FRAMEWORK = {
     ),
 }
 
-JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'incident_webscraper.utils.my_jwt_response_handler'
-}
+# JWT_AUTH = {
+#     'JWT_RESPONSE_PAYLOAD_HANDLER': 'incident_webscraper.utils.my_jwt_response_handler'
+# }
 
 TEMPLATES = [
     {
