@@ -67,7 +67,7 @@ distance_key = {
         8.5: 0.0765,
         9: 0.081,
         9.5: 0.0855,
-        10: 0.09
+        10: 0.09,
         10.5: 0.0945,
         11: 0.099,
         11.5: 0.1035,
@@ -96,7 +96,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
     
     model = Incidents
     serializer_class = IncidentsSerializer
-    
+
     def list(self, request, **kwargs):
         lat = 52.4
         lng = 4.9
