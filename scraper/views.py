@@ -94,6 +94,7 @@ distance_key = {
 # op basis van locatie, tijd en reiwijdte 
 class NearbyIncidents(viewsets.ModelViewSet):
     
+    
     model = Incidents
     serializer_class = IncidentsSerializer
 
