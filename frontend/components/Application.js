@@ -19,8 +19,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoia2RlYnJhdXciLCJhIjoiY2p4ZnhyaTUzMDB1eTQxbnVwO
 class Application extends React.Component {
   constructor(props) {
     super(props);
-    // this.handleSearchRangeChange = this.handleSearchRangeChange.bind(this);
-    // this.handleDateRangehange = this.handleDateRangeChange.bind(this)
+    
     this.state = {
       lng: 5.8,
       lat: 52,
@@ -37,7 +36,7 @@ class Application extends React.Component {
     this.handleSearchRangeChange = this.handleSearchRangeChange.bind(this)
     this.handleWordSearchChange = this.handleWordSearchChange.bind(this)
     this.handleIncludePoliceChange = this.handleIncludePoliceChange.bind(this)
-    this.handleIncludeAmbuChange = this.handleIncludeAmbuChange.bind(this)
+    this.handleIncludeFireChange = this.handleIncludeFireChange.bind(this)
     this.handleIncludeAmbuChange = this.handleIncludeAmbuChange.bind(this)
   }
 
@@ -56,6 +55,7 @@ class Application extends React.Component {
 
   handleIncludePoliceChange(value) {
     this.setState({includePolice: value});
+    console.log('police: ' + value)
   };
 
   handleIncludeFireChange(value) {
@@ -106,7 +106,7 @@ class Application extends React.Component {
           'wordSearch': this.state.wordSearch,
           'includePolice': this.state.includePolice,
           'includeFire': this.state.includeFire,
-          'includeAmbu': this.state.includeAmbu
+          'includeAmbu': this.state.includeAmbu,
         }
       }).then(results => { 
         this.results = results.data
@@ -175,7 +175,7 @@ class Application extends React.Component {
           
           popup_extra
           .setLngLat(coordinates)
-          .setHTML('<H3> Incident </H3>' + pub_date + '<br> <br> Priority: ' + priority_code + '<br> <br> Message: ' + comment)
+          .setHTML('<H3> Incident </H3>' + pub_date + '<br> <br> Priority: ' + priority_code + '<br> emergency service: ' + emergency_service + '<br> <br> Message: ' + comment)
           .addTo(map);
 
           

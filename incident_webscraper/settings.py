@@ -39,7 +39,7 @@ DEBUG = True
 # Who can access the database
 ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp.com/', 'http://www.incidentradar.com/', 'https://www.incidentradar.com/']
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
        'http://127.0.0.1:8000', 
        'https://incident-monitor-nl.herokuapp.com', 
@@ -87,7 +87,6 @@ ROOT_URLCONF = 'incident_webscraper.urls'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -100,7 +99,8 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'incident_webscraper.utils.my_jwt_response_handler'
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'incident_webscraper.utils.my_jwt_response_handler',
+    'JWT_AUTH_HEADER_PREFIX': 'Token',
 }
 
 TEMPLATES = [

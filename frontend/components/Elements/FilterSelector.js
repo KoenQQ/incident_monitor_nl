@@ -77,13 +77,26 @@ class FilterSelector extends React.Component {
         
         <br />
         <Checkbox 
-        defaultChecked
-        // onChange={(value) => {
-        //   this.sendIncludeFireChange(value)
-        // }}
-        > Brandweer</Checkbox>
-        <Checkbox defaultChecked> Politie</Checkbox>
-        <Checkbox defaultChecked> Ambulance</Checkbox>
+          defaultChecked
+          
+          onChange={(checked) => {
+          this.sendIncludeFireChange(checked)
+          console.log("brand: " + checked)
+          }}> Brandweer
+        </Checkbox>
+        <Checkbox 
+          defaultChecked
+          onChange={(value) => {
+          this.sendIncludePoliceChange(value)
+          console.log("politie: " + value)
+          }}> Politie
+        </Checkbox>
+        <Checkbox defaultChecked 
+          onChange={(value) => {
+          this.sendIncludeAmbuChange(value)
+          console.log("ambu: " + value)
+          }}> Ambulance
+        </Checkbox>
       </div>
     );
   }
