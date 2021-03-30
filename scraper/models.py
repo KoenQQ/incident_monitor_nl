@@ -8,7 +8,7 @@ import uuid
 # Create your models here.
 
 class Incidents(models.Model):
-    """database fields"""
+    """Incidentslists"""
 
     monitorcode = models.CharField(max_length=2500, null=True, blank=True) 
     comment = models.CharField(max_length=300, null=True, blank=True)
@@ -29,4 +29,6 @@ class Incidents(models.Model):
 
     class Admin:
         pass
+
+# class ClientLocations(models.Model):
 

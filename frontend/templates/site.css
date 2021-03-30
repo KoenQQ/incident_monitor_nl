@@ -11,6 +11,44 @@
     padding: 6px;
 }
 
+.loginExplainer{
+    position: fixed;
+    top: 200px;
+    bottom: 200px;
+    left: 200px;
+    display: inline-block;
+    width: 550px;
+    background: #2A3C47;
+    z-index: 5 !important;
+    padding: 6px;
+}
+.loginHolder{
+    position: fixed;
+    top: 450px;
+    left: 950px;
+    display: inline-block;
+    width: 360px;
+    height: 300px;    
+    background: #2A3C47;
+    color: #ffffff;
+    z-index: 5 !important;
+    padding: 6px;
+}
+
+.backgroundImage{
+    background-repeat: no-repeat;
+    background-size: auto;
+    
+}
+
+.navbarStyle{
+    position: absolute;
+    display: inline-block;
+    z-index: 1 !important;
+    top: 20px;
+    right: 20px;
+}
+
 .headerStyle{
     display: inline-block;
     position: absolute;
@@ -94,8 +132,9 @@
 }
 
 .carthaBar {  
-    position: relative;
-    top: 93%;
+    position: absolute;
+    bottom: 15px;
+    
     /* left: 35%;
     right: 35%; */
     align-items: center;

@@ -15,6 +15,7 @@ from scraper.models import Incidents
 import zlib
 
 
+
 class Command(BaseCommand):
     """custom commandline command that scrapes
         title, description and more from livep2000 and pushes
