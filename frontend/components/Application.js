@@ -187,7 +187,7 @@ class Application extends React.Component {
           
           popup_extra
           .setLngLat(coordinates)
-          .setHTML('<H3> Incident </H3>' + pub_date + '<br> <br> Priority: ' + priority_code + '<br> emergency service: ' + emergency_service + '<br> <br> Message: ' + comment)
+          .setHTML('<H3> Incident </H3>' + pub_date + '<br> <br> Prioriteit: ' + priority_code + '<br> Hulpdienst: ' + emergency_service + '<br> <br> Bericht: ' + comment)
           .addTo(map);
 
           
