@@ -120,26 +120,26 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #filter voor specifieke woorden
         comment = self.request.GET.get('wordSearch')
-        
+
         #filters voor specifieke hulpdiensten aan/uit
-        includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
-        for bool in includePolice:
-            if includePolice == true:
-                policeFilter = emergency_service__icontains='pol'
-            else:
-                policeFilter = emergency_service_icontains=''
-        includeFire = self.request.GET.get('includeFire') # add or exclude emergency service br
-        for bool in includeFire:
-            if includeFire == true:
-                fireFilter = emergency_service__icontains='br'
-            else: 
-                fireFilter = emergency_service__icontains=''
-        includeAmbu = self.request.GET.get('includeAmbu') # add or exclude emergency service ambu
-        for bool in includeAmbu:
-            if includeAmbu == true:
-                ambulanceFilter = emergency_service__icontains='ambu'
-            else:
-                ambulanceFilter = emergency_service__icontains=''
+        # includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
+        # for bool in includePolice:
+        #     if includePolice == true:
+        #         policeFilter = emergency_service__icontains='pol'
+        #     else:
+        #         policeFilter = emergency_service_icontains=''
+        # includeFire = self.request.GET.get('includeFire') # add or exclude emergency service br
+        # for bool in includeFire:
+        #     if includeFire == true:
+        #         fireFilter = emergency_service__icontains='br'
+        #     else: 
+        #         fireFilter = emergency_service__icontains=''
+        # includeAmbu = self.request.GET.get('includeAmbu') # add or exclude emergency service ambu
+        # for bool in includeAmbu:
+        #     if includeAmbu == true:
+        #         ambulanceFilter = emergency_service__icontains='ambu'
+        #     else:
+        #         ambulanceFilter = emergency_service__icontains=''
         
         #daadwerkelijke filter
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(entry_comment_contains=comment)
