@@ -11,10 +11,22 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2RlYnJhdXciLCJhIjoiY2p4ZnhyaTUzMDB1eTQxbnVwOG9jbHBwdSJ9.L5RCSfMVV7RYpq1a45E68g';
 
-// axios.interceptors.request.use(x => {
-//   console.log(x);
-//   return x;
-// });
+axios.interceptors.request.use(x => {
+  console.log(x);
+  return x;
+});
+
+axios.defaults.headers.common['WWW-Authenticate'] = localStorage.getItem('token');
+
+
+axios.interceptors.response.use(x => {
+  console.log(x)
+  return x;
+}, function (error) {
+  // Any status codes that falls outside the range of 2xx cause this function to trigger
+  // Do something with response error
+  return Promise.reject(error);
+});
 
 class Application extends React.Component {
   constructor(props) {

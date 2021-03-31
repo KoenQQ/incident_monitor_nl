@@ -39,7 +39,11 @@ DEBUG = True
 # Who can access the database
 ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp.com/', 'http://www.incidentradar.com/', 'https://www.incidentradar.com/']
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
+                      'content-type', 'accept', 'origin', 'authorization', 'www-authenticate')
+
 CORS_ORIGIN_WHITELIST = (
        'http://127.0.0.1:8000', 
        'https://incident-monitor-nl.herokuapp.com', 

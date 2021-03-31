@@ -120,7 +120,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #filter voor specifieke woorden
         comment = self.request.GET.get('wordSearch')
-
+        
         #filters voor specifieke hulpdiensten aan/uit
         includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
         for bool in includePolice:
