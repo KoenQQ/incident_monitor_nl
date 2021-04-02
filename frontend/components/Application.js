@@ -40,7 +40,7 @@ class Application extends React.Component {
       dateRange: 30,
       array: 0,
       wordSearch: "",
-      includePolice: true,
+      includePol: true,
       includeFire: true,
       includeAmbu: true
     };
@@ -66,17 +66,19 @@ class Application extends React.Component {
   };
 
   handleIncludePoliceChange(value) {
-    this.setState({includePolice: value});
+    this.setState({includePol: value});
     console.log('police: ' + value)
   };
 
   handleIncludeFireChange(value) {
     this.setState({includeFire: value});
+    console.log('fire: ' + value)
   };
 
   handleIncludeAmbuChange(value) {
     this.setState({includeAmbu: value});
-    console.log(this.state.includeAmbu)
+    console.log('ambu new: ' + value)
+    console.log('ambu current: ' + this.state.includeAmbu)
   };
 
   
@@ -116,9 +118,9 @@ class Application extends React.Component {
           'location-list': `SRID=4326;POINT(${lng} ${lat})`,
           'searchRange': this.state.searchRange,
           'wordSearch': this.state.wordSearch,
-          // 'includePolice': this.state.includePolice,
-          // 'includeFire': this.state.includeFire,
-          // 'includeAmbu': this.state.includeAmbu,
+          'includePolice': this.state.includePolice,
+          'includeFire': this.state.includeFire,
+          'includeAmbu': this.state.includeAmbu,
         }
       }).then(results => { 
         this.results = results.data
@@ -204,7 +206,7 @@ class Application extends React.Component {
 
     });
 
-// test 
+
 
 
     function jsonToGeoJson(e) {
@@ -273,6 +275,9 @@ class Application extends React.Component {
             includePoliceChange = {this.handleIncludePoliceChange}
             includeFireChange = {this.handleIncludeFireChange}
             includeAmbuChange = {this.handleIncludeAmbuChange}
+            includeFire = {this.state.includeFire}
+            includePol = {this.state.includePol}
+            includeFire = {this.state.includeAmbu}
             /> 
           </div>
           <div className='sidebarStyle'>

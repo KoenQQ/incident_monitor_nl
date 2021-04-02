@@ -14,10 +14,11 @@
 .loginExplainer{
     position: fixed;
     top: 200px;
-    bottom: 200px;
+    
     left: 200px;
     display: inline-block;
     width: 550px;
+    height: 600px;
     background: #2A3C47;
     z-index: 5 !important;
     padding: 6px;

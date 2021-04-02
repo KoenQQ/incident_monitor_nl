@@ -30,7 +30,6 @@ class LoginForm extends React.Component {
 
 
   
-  
   handle_login = (e, data) => {
     e.preventDefault();
     fetch(`${current_environment}/token-auth/`, {

@@ -5,10 +5,20 @@ import { Slider, Input, Checkbox, HelpBlock } from "rsuite";
 import React, {Component} from "react";
 import "rsuite/dist/styles/rsuite-default.css";
 
+
+
+
 class FilterSelector extends React.Component {
   constructor(props) {
-    super(props)
-    console.log(this.props)
+    super(props);
+    // console.log(this.props)
+
+    this.state = {
+      checkboxFire: true,
+      checkboxPol: true,
+      checkboxAmbu: true
+    }
+
   }
   
   sendSearchRangeChange = (e) => {
@@ -29,12 +39,28 @@ class FilterSelector extends React.Component {
 
   sendIncludeFireChange = (e) => {
     this.props.includeFireChange(e);
-    console.log(e)
+    // console.log(e)
   }
   
   sendIncludeAmbuChange = (e) => {
     this.props.includeAmbuChange(e);
     
+  }
+
+  handleFireChange = (event) => {
+    this.setState({
+      checkboxFire: !this.state.checkboxFire})
+    this.sendIncludeFireChange(this.state.checkboxFire)
+  }
+  handlePolChange = (event) => {
+    this.setState({
+      checkboxPol: !this.state.checkboxPol})
+    this.sendIncludePoliceChange(this.state.checkboxPol)
+  }   
+  handleAmbuChange = (event) => {
+    this.setState({
+      checkboxAmbu: !this.state.checkboxAmbu})
+    this.sendIncludeAmbuChange(this.state.checkboxAmbu)
   }
 
   render() {
@@ -77,25 +103,20 @@ class FilterSelector extends React.Component {
         
         <br />
         <Checkbox 
-          defaultChecked
-          
-          onChange={(checked) => {
-          this.sendIncludeFireChange(checked)
-          console.log("brand: " + checked)
-          }}> Brandweer
+          defaultChecked 
+          onChange={this.handleFireChange}
+          > 
+          Brandweer
         </Checkbox>
         <Checkbox 
           defaultChecked
-          onChange={(value) => {
-          this.sendIncludePoliceChange(value)
-          console.log("politie: " + value)
-          }}> Politie
+          onChange={this.handlePolChange}
+          > Politie
         </Checkbox>
-        <Checkbox defaultChecked 
-          onChange={(value) => {
-          this.sendIncludeAmbuChange(value)
-          console.log("ambu: " + value)
-          }}> Ambulance
+        <Checkbox 
+        defaultChecked 
+          onChange={this.handleAmbuChange}
+          > Ambulance
         </Checkbox>
       </div>
     );
