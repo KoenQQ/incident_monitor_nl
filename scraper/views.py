@@ -123,7 +123,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #filters voor specifieke hulpdiensten aan/uit
         includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
-        print(includePolice)
+        print('hallo include politie' + includePolice)
         # for f in includePolice:
         #     if f == True:
         #         policeFilter = emergency_service__icontains='pol'
