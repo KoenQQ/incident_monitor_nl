@@ -19,6 +19,7 @@ axios.interceptors.request.use(x => {
 axios.defaults.headers.common['WWW-Authenticate'] = localStorage.getItem('token');
 
 
+// interceptor that puts call details in console
 axios.interceptors.response.use(x => {
   console.log(x)
   return x;

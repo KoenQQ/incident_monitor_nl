@@ -123,15 +123,16 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #filters voor specifieke hulpdiensten aan/uit
         includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
-        print(includePolice + type(includePolice))
+        # print(includePolice)
         policeFilter = []
-        if includePolice == True:
+        if includePolice == 'true':
             policeFilter = 'pol'
             print('policeFilter = ' + policeFilter)
         else:
-            policeFilter = ''
+            policeFilter = 'false'
             print('policeFilter = ' + policeFilter)
         includeFire = self.request.GET.get('includeFire') # add or exclude emergency service br
+        print(includeFire + type(includeFire))
         # for f in includeFire:
         #     if f == True:
         #         fireFilter = emergency_service__icontains='br'
