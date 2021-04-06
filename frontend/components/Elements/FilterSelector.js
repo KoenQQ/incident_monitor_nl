@@ -115,6 +115,7 @@ class FilterSelector extends React.Component {
         </Checkbox>
         <Checkbox 
         defaultChecked 
+        
           onChange={this.handleAmbuChange}
           > Ambulance
         </Checkbox>

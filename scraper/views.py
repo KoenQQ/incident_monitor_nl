@@ -123,23 +123,24 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #filters voor specifieke hulpdiensten aan/uit
         includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
-        for f in includePolice:
-            if f == True:
-                policeFilter = emergency_service__icontains='pol'
-            else:
-                policeFilter = emergency_service_icontains=''
+        print(includePolice)
+        # for f in includePolice:
+        #     if f == True:
+        #         policeFilter = emergency_service__icontains='pol'
+        #     else:
+        #         policeFilter = emergency_service_icontains=''
         includeFire = self.request.GET.get('includeFire') # add or exclude emergency service br
-        for f in includeFire:
-            if f == True:
-                fireFilter = emergency_service__icontains='br'
-            else: 
-                fireFilter = emergency_service__icontains=''
+        # for f in includeFire:
+        #     if f == True:
+        #         fireFilter = emergency_service__icontains='br'
+        #     else: 
+        #         fireFilter = emergency_service__icontains=''
         includeAmbu = self.request.GET.get('includeAmbu') # add or exclude emergency service ambu
-        for f in includeAmbu:
-            if f == True:
-                ambulanceFilter = emergency_service__icontains='ambu'
-            else:
-                ambulanceFilter = emergency_service__icontains=''
+        # for f in includeAmbu:
+        #     if f == True:
+        #         ambulanceFilter = emergency_service__icontains='ambu'
+        #     else:
+        #         ambulanceFilter = emergency_service__icontains=''
         
         #daadwerkelijke filter
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment)
