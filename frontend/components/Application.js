@@ -72,7 +72,7 @@ class Application extends React.Component {
 
   handleIncludeFireChange(value) {
     this.setState({includeFire: value});
-    console.log('fire: ' + value)
+    console.log(value + typeof value)
   };
 
   handleIncludeAmbuChange(value) {
