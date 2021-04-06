@@ -119,7 +119,7 @@ class Application extends React.Component {
           'location-list': `SRID=4326;POINT(${lng} ${lat})`,
           'searchRange': this.state.searchRange,
           'wordSearch': this.state.wordSearch,
-          'includePolice': this.state.includePolice,
+          'includePolice': this.state.includePol,
           'includeFire': this.state.includeFire,
           'includeAmbu': this.state.includeAmbu,
         }

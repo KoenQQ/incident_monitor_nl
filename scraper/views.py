@@ -123,28 +123,33 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #filters voor specifieke hulpdiensten aan/uit
         includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
-        # print(includePolice)
+        print('police ' + includePolice)
         policeFilter = []
         if includePolice == 'true':
             policeFilter = 'pol'
             print('policeFilter = ' + policeFilter)
         else:
             policeFilter = 'false'
-            print('policeFilter = ' + policeFilter)
+            print('policeFilter = empty')
         includeFire = self.request.GET.get('includeFire') # add or exclude emergency service br
+        fireFilter = []
         print('fire ' + includeFire)
-        # for f in includeFire:
-        #     if f == True:
-        #         fireFilter = emergency_service__icontains='br'
-        #     else: 
-        #         fireFilter = emergency_service__icontains=''
+        if includeFire == 'true':
+            fireFilter = 'br'
+            print('fireFilter = ' + fireFilter)
+        else: 
+            fireFilter = ''
+            print('fireFilter = empty')
         includeAmbu = self.request.GET.get('includeAmbu') # add or exclude emergency service ambu
-        # for f in includeAmbu:
-        #     if f == True:
-        #         ambulanceFilter = emergency_service__icontains='ambu'
-        #     else:
-        #         ambulanceFilter = emergency_service__icontains=''
-        
+        ambuFilter = []
+        print('ambu ' + includeAmbu)
+        if includeAmbu == 'true':
+            ambuFilter = 'ambu'
+            print('ambufilter = ' + ambuFilter)
+        else: 
+            ambuFilter = ''
+            print('ambufilter = empty')
+
         #daadwerkelijke filter
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment)
         # .filter(policeFilter).filter(fireFilter).filter(ambulanceFilter)
