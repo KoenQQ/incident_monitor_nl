@@ -35,6 +35,7 @@ class FilterSelector extends React.Component {
 
   sendIncludePoliceChange = (e) => {
     this.props.includePoliceChange(e);
+    console.log('poasdfe: ' + e)
   }
 
   sendIncludeFireChange = (e) => {
@@ -43,13 +44,17 @@ class FilterSelector extends React.Component {
   }
   
   sendIncludeAmbuChange = (e) => {
-    this.props.includeAmbuChange(e);
-    
+    this.props.includeAmbuChange(e);  
+  }
+
+  handleChange = (name, event) => {
+    this.props.handleChange(name, event);
   }
 
   handleFireChange = (event) => {
     this.setState({
       checkboxFire: !this.state.checkboxFire})
+
     this.sendIncludeFireChange(this.state.checkboxFire)
   }
   handlePolChange = (event) => {
@@ -60,8 +65,10 @@ class FilterSelector extends React.Component {
   handleAmbuChange = (event) => {
     this.setState({
       checkboxAmbu: !this.state.checkboxAmbu})
+    
     this.sendIncludeAmbuChange(this.state.checkboxAmbu)
   }
+
 
   render() {
     return (
@@ -103,19 +110,17 @@ class FilterSelector extends React.Component {
         
         <br />
         <Checkbox 
-          defaultChecked 
+          checked={!!this.props.includeFire}
           onChange={this.handleFireChange}
-          > 
-          Brandweer
+          > Brandweer
         </Checkbox>
         <Checkbox 
-          defaultChecked
+          checked={!!this.props.includePol}
           onChange={this.handlePolChange}
           > Politie
         </Checkbox>
         <Checkbox 
-        defaultChecked 
-        
+          checked={!!this.props.includeAmbu} 
           onChange={this.handleAmbuChange}
           > Ambulance
         </Checkbox>

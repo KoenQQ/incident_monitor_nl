@@ -41,10 +41,11 @@ class Application extends React.Component {
       dateRange: 30,
       array: 0,
       wordSearch: "",
-      includePol: true,
       includeFire: true,
+      includePol: true,
       includeAmbu: true
     };
+    // this.handleChange = this.handlechange.bind(this)
     this.handleDateRangeChange = this.handleDateRangeChange.bind(this)
     this.handleSearchRangeChange = this.handleSearchRangeChange.bind(this)
     this.handleWordSearchChange = this.handleWordSearchChange.bind(this)
@@ -54,6 +55,10 @@ class Application extends React.Component {
   }
 
   //functions to handle changes in filter sliders 
+  handleChange = name => event => {
+    setState({ ...state, [name]: event.target.checked });
+  };
+  
   handleDateRangeChange(value) {
     this.setState({dateRange: value});
   };
@@ -66,20 +71,22 @@ class Application extends React.Component {
     this.setState({wordSearch: value});
   };
 
-  handleIncludePoliceChange(value) {
-    this.setState({includePol: value});
-    console.log('police: ' + value)
-  };
+ 
 
   handleIncludeFireChange(value) {
     this.setState({includeFire: value});
-    console.log(value + typeof value)
+    console.log('fire new: ' + value)
+  };
+
+  handleIncludePoliceChange(value) {
+    this.setState({includePol: value});
+    console.log('police new: ' + value)
   };
 
   handleIncludeAmbuChange(value) {
     this.setState({includeAmbu: value});
     console.log('ambu new: ' + value)
-    console.log('ambu current: ' + this.state.includeAmbu)
+    // console.log('ambu current: ' + this.state.includeAmbu)
   };
 
   
@@ -270,6 +277,7 @@ class Application extends React.Component {
             <FilterSelector 
             searchRanged = {this.state.searchRange}
             dateRanged = {this.state.dateRange}
+            handleChange = {this.handleChange}
             searchRangeChange = {this.handleSearchRangeChange}
             dateRangeChange={this.handleDateRangeChange} 
             wordSearchChange = {this.handleWordSearchChange}
@@ -278,7 +286,7 @@ class Application extends React.Component {
             includeAmbuChange = {this.handleIncludeAmbuChange}
             includeFire = {this.state.includeFire}
             includePol = {this.state.includePol}
-            includeFire = {this.state.includeAmbu}
+            includeAmbu = {this.state.includeAmbu}
             /> 
           </div>
           <div className='sidebarStyle'>
