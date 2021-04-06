@@ -150,8 +150,10 @@ class NearbyIncidents(viewsets.ModelViewSet):
             ambuFilter = ''
             print('ambufilter = empty')
 
+        
         #daadwerkelijke filter
-        queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment).filter(emergency_service__contains=policeFilter).filter(emergency_service__contains=fireFilter).filter(emergency_service__contains=ambuFilter)
+        queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment).filter(emergency_service__contains=policeFilter)
+        # .filter(emergency_service__contains=fireFilter).filter(emergency_service__contains=ambuFilter)
         recent_incidents_list = queryset
         updated_incidents_list = serializers.serialize("json", recent_incidents_list)
 
