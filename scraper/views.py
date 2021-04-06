@@ -154,7 +154,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
             ambuFilter = ''
             print('ambufilter = empty')
 
-        print('finalfilter contains: ' + finalFilter)
+        print(finalFilter)
         
         #daadwerkelijke filter
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment).filter(emergency_service__in=finalFilter)
