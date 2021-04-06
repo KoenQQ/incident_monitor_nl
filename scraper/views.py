@@ -124,18 +124,21 @@ class NearbyIncidents(viewsets.ModelViewSet):
         #filters voor specifieke hulpdiensten aan/uit
         includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
         print('police ' + includePolice)
+        finalFilter = []
         policeFilter = []
         if includePolice == 'true':
             policeFilter = 'pol'
+            finalFilter.append('pol')
             print('policeFilter = ' + policeFilter)
         else:
-            policeFilter = 'false'
+            policeFilter = ''
             print('policeFilter = empty')
         includeFire = self.request.GET.get('includeFire') # add or exclude emergency service br
         fireFilter = []
         print('fire ' + includeFire)
         if includeFire == 'true':
             fireFilter = 'br'
+            finalFilter.append('br')
             print('fireFilter = ' + fireFilter)
         else: 
             fireFilter = ''
@@ -145,14 +148,16 @@ class NearbyIncidents(viewsets.ModelViewSet):
         print('ambu ' + includeAmbu)
         if includeAmbu == 'true':
             ambuFilter = 'ambu'
+            finalFilter.append('ambu')
             print('ambufilter = ' + ambuFilter)
         else: 
             ambuFilter = ''
             print('ambufilter = empty')
 
+        print('finalfilter contains: ' + finalFilter)
         
         #daadwerkelijke filter
-        queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment).filter(emergency_service__contains=policeFilter)
+        queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment).filter(emergency_service__in=finalFilter)
         # .filter(emergency_service__contains=fireFilter).filter(emergency_service__contains=ambuFilter)
         recent_incidents_list = queryset
         updated_incidents_list = serializers.serialize("json", recent_incidents_list)
