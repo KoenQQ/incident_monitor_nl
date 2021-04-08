@@ -45,7 +45,7 @@ class Login extends React.Component {
                     De Incidentradar helpt sneller en adequater te reageren op incidenten om zo negatieve effecten te verminderen en preventie te verbeteren.  </div>
                     <br /><br />
                     <div>Gebruik de Incidentradar om..  </div>
-                    <div>1. .. automatisch gewaarschuwd te worden als er iets bij je een van je adressen/in je buurt wat aan de hand is, waardoor je sneller kan reageren en eventuele kan schade beperken.</div>
+                    <div>1. .. automatisch gewaarschuwd te worden als er iets bij je een van je adressen/in je buurt wat aan de hand is, waardoor je sneller kan reageren en eventuele schade kan beperken.</div>
                     <div>2. .. eenvoudig de incidentendata voor eigen inzichten te gebruiken. </div>
                     <div>3. .. (toekomst) locatie risico inzichten op basis van historische data te krijgen.</div>
                     <br /><br /><br /><br />
