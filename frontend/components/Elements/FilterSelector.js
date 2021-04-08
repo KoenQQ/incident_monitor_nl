@@ -35,7 +35,6 @@ class FilterSelector extends React.Component {
 
   sendIncludePoliceChange = (e) => {
     this.props.includePoliceChange(e);
-    console.log('poasdfe: ' + e)
   }
 
   sendIncludeFireChange = (e) => {
@@ -54,7 +53,6 @@ class FilterSelector extends React.Component {
   handleFireChange = (event) => {
     this.setState({
       checkboxFire: !this.state.checkboxFire})
-
     this.sendIncludeFireChange(this.state.checkboxFire)
   }
   handlePolChange = (event) => {
@@ -65,7 +63,6 @@ class FilterSelector extends React.Component {
   handleAmbuChange = (event) => {
     this.setState({
       checkboxAmbu: !this.state.checkboxAmbu})
-    
     this.sendIncludeAmbuChange(this.state.checkboxAmbu)
   }
 
