@@ -41,19 +41,19 @@ class Login extends React.Component {
                     <div>Incidentradar</div>
                 </div>
                 <div className='introbarStyle'>
-                    <div>Buurtwacht, projectontwikkelaar, beveiliging of verzekeraar?
-                    De incidentradar helpt alle eigen locaties in de gaten te houden en geeft 
-                        een waarschuwing als er iets bij de locatie aan de hand is. </div>
+                    <div>Verzekeraar, projectontwikkelaar, buurtwacht of beveiliging?
+                    De Incidentradar helpt sneller en adequater te reageren op incidenten om zo negatieve effecten te verminderen en preventie te verbeteren.  </div>
                     <br /><br />
-                    <div>Gebruik de incidentradar om..  </div>
+                    <div>Gebruik de Incidentradar om..  </div>
                     <div>1. .. automatisch gewaarschuwd te worden als er iets bij je een van je adressen/in je buurt wat aan de hand is, waardoor je sneller kan reageren en eventuele kan schade beperken.</div>
                     <div>2. .. eenvoudig de incidentendata voor eigen inzichten te gebruiken. </div>
                     <div>3. .. (toekomst) locatie risico inzichten op basis van historische data te krijgen.</div>
-                    
+                    <br /><br /><br /><br />
+                    <div>De Incidentradar is op dit moment in Private Beta. Geïnteresseerd in een demo? Stuur een bericht naar koen@cartha.io. </div>
                </div> 
                <div className='loginHolder'>
                     <div>
-                    Hello! 
+                    Welkom terug!  
                     </div>
                     <div>
                     <LoginForm 

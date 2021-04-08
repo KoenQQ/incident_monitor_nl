@@ -15,7 +15,7 @@
     position: fixed;
     top: 200px;
     
-    left: 200px;
+    left: 300px;
     display: inline-block;
     width: 550px;
     height: 600px;
@@ -25,8 +25,8 @@
 }
 .loginHolder{
     position: fixed;
-    top: 450px;
-    left: 950px;
+    top: 500px;
+    left: 900px;
     display: inline-block;
     width: 360px;
     height: 300px;    
@@ -48,6 +48,10 @@
     z-index: 1 !important;
     top: 20px;
     right: 20px;
+}
+
+.topStyle{
+    z-index: -1 !important;
 }
 
 .headerStyle{
