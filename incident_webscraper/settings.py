@@ -220,7 +220,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+WHITENOISE_MANIFEST_STRICT = False
 
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
