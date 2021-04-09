@@ -32,7 +32,7 @@ class Incidents(models.Model):
 
 class ClientLocations(models.Model):
     """Tracked locations added by users"""
-
+    
     name = models.CharField(max_length=250, null=True, blank=True)
     customer_id = models.CharField(max_length=250, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
