@@ -37,7 +37,7 @@ class ClientLocations(models.Model):
     customer_id = models.CharField(max_length=250, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
     address = models.CharField(max_length=40, null=True, blank=True)
-    location = gis_models.PointField(default=Point(0,0), blank=True)
+    client_location = gis_models.PointField(default=Point(0,0), blank=True)
     user = models.CharField(max_length=40, blank=True, null=True)
 
     def __str__(self):

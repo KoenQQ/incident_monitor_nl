@@ -11,5 +11,5 @@ class IncidentAdmin(OSMGeoAdmin):
     
 @admin.register(ClientLocations)
 class ClientLocationsAdmin(OSMGeoAdmin):
-    list_display = ("id", "name", "customer_id", "address", "location", "user")
+    list_display = ("id", "name", "customer_id", "address", "client_location", "user")
 
