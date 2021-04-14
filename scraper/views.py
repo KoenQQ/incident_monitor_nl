@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework import viewsets, permissions, status
-from scraper.serializers import IncidentsSerializer
-from scraper.serializers import UserSerializer, UserSerializerWithToken
-from .models import Incidents
+from scraper.serializers import IncidentsSerializer, IncidentHitsSerializer, UserSerializer, UserSerializerWithToken
+from .models import Incidents, IncidentHits
 import django_filters
 from django.views.generic import TemplateView
 from django.views import generic
@@ -38,6 +37,11 @@ def mapItem(item):
 class IncidentsViewSet(viewsets.ModelViewSet):
     queryset = Incidents.objects.all().order_by('monitorcode')
     serializer_class = IncidentsSerializer
+
+class IncidentHitsViewSet(viewsets.ModelViewSet):
+    queryset = IncidentHits.objects.all().order_by('pub_date')
+    serializer_class = IncidentHitsSerializer
+
 
 def return_degrees(e):
         km = e
@@ -111,7 +115,8 @@ class NearbyIncidents(viewsets.ModelViewSet):
         dateRange = int(dateRange)
 
         #location 
-        point = self.request.GET.get('location-list') 
+        point = self.request.GET.get('location-list')
+        
 
         #searchrange
         searchRange = self.request.GET.get('searchRange')
@@ -120,7 +125,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #filter for specific words
         comment = self.request.GET.get('wordSearch')
-
+        
         #(de)select specific emergency services
         includePolice = self.request.GET.get('includePolice') # add or exclude emergency service pol
         finalFilter = []
@@ -139,22 +144,35 @@ class NearbyIncidents(viewsets.ModelViewSet):
             fireFilter = ''
         includeAmbu = self.request.GET.get('includeAmbu') # add or exclude emergency service ambu
         ambuFilter = []
-        print('ambu ' + includeAmbu)
         if includeAmbu == 'true':
             ambuFilter = 'ambu'
             finalFilter.append('ambu')
         else: 
             ambuFilter = ''
 
-        print(finalFilter)
         
         #actual filter
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment).filter(emergency_service__in=finalFilter)
         recent_incidents_list = queryset
         updated_incidents_list = serializers.serialize("json", recent_incidents_list)
-        
+
         #answer
         return HttpResponse(updated_incidents_list)
+
+
+class IncidentHitList(viewsets.ModelViewSet):
+    """ returns all hits pertaining incidents nearby client locations """
+
+    model = IncidentHits
+    serializer_class = IncidentHitsSerializer
+
+    def list(self, request, **kwargs):
+        user = self.request.GET.get('user')
+        #returns *all* hits. future: add param that defines nr of days. 
+        queryset = IncidentHits.objects.filter(user__in=user)
+        hit_list = serializers.serialize("json", queryset)
+
+        return HttpResponse(hit_list)
 
 
  
@@ -173,17 +191,45 @@ def current_user(request):
 
 
 # ACTIVATE WHEN IMPLEMENTING SIGNUP
-class UserList(APIView):
-    """
-    Create a new user. It's called 'UserList' because normally we'd have a get
-    method here too, for retrieving a list of all User objects.
-    """
+# class UserList(APIView):
+#     """
+#     Create a new user. It's called 'UserList' because normally we'd have a get
+#     method here too, for retrieving a list of all User objects.
+#     """
 
-    permission_classes = (permissions.AllowAny,)
+#     permission_classes = (permissions.AllowAny,)
 
-    def post(self, request, format=None):
-        serializer = UserSerializerWithToken(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def post(self, request, format=None):
+#         serializer = UserSerializerWithToken(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# class ClientLocations(APIView):
+#     """
+#     Add and remove client locations 
+#     """
+
+#     def post(self, request, format=None):
+#         serializer = ClientLocationsWithToken(data=request.data)
+#         if serializer.is_valid():
+#             #transform postcode into point 
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+#     def get(self, request, format=None):
+#         # de axios call naar deze get request komt vanuit een gebruiker en moet _alle_ locaties terugsturen voor in de tabel
+        
+#         serializer = #enter serializer hier
+#         if serializer.is_valid():
+#             user = self.request.GET.get('user')
+#             queryset = ClientLocations.objects.filter(user__in=user)
+#             updated_queryset = serializers.serialize("json", queryset)
+#             return HttpResponse(updated_queryset, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+

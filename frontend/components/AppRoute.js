@@ -25,7 +25,7 @@ class AppRoute extends Component {
     // console.log('counts as logged in: ' + logged_in)
     
   }
-
+  
   ComponentDidMount() {
     //if logged in, change username in state
     // naast naam aanmaken doet dit niets volgens mij. 

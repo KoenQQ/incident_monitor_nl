@@ -1,6 +1,6 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Incidents
+from .models import Incidents, ClientLocations, IncidentHits
 # from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 
@@ -10,12 +10,21 @@ class IncidentsSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('monitorcode', 'comment', 'priority_code', 'emergency_service', 
                 'location', 'region', 'pub_date')
 
+class IncidentHitsSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = IncidentHits
+        fields = ('monitorcode', 'comment', 'priority_code', 'emergency_service', 'location', 'region', 'pub_date', 'name', 'customer_id', 'description', 'address', 'location', 'user')
 
 class UserSerializer(serializers.ModelSerializer):
-
+    
     class Meta:
         model = User
         fields = ('username',)
+
+class ClientLocationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ClientLocations
+        fields = ('name', 'customer_id', 'description', 'address', 'location', 'user')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -42,3 +51,25 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('token', 'username', 'password')
+
+
+class ClientLocationsWithToken(serializers.ModelSerializer):
+
+    token = serializers.SerializerMethodField()
+    password = serializers.CharField(write_only=True)
+
+    def get_token(self, obj):
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+        payload = jwt_payload_handler(obj)
+        token = jwt_encode_handler(payload)
+        return token
+    
+    # def create(self, validated_data):
+    #     #hoe verhoud zich dit tot de view. 
+
+    # # class Meta:
+    # #     models = ClientLocations
+    # #     fields = ('name', 'customer_id', 'description', 'address', 'location', 'user')
+
