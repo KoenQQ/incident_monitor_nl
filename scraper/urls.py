@@ -6,6 +6,7 @@ from scraper.views import current_user
 
 router = routers.DefaultRouter()
 router.register(r'incidents', views.IncidentsViewSet, basename='incidents')
+router.register(r'location', views.NearbyIncidents, basename='location')
 router.register(r'incidentHits', views.IncidentHitsViewSet, basename='IncidentHits')
 
 
