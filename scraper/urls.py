@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 router.register(r'incidents', views.IncidentsViewSet, basename='incidents')
 router.register(r'location', views.NearbyIncidents, basename='location')
 router.register(r'incidentHits', views.IncidentHitsViewSet, basename='IncidentHits')
-
+router.register(r'incidentHitList', views.IncidentHitList, basename='IncidentHitList')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

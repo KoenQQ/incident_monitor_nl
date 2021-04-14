@@ -97,8 +97,7 @@ distance_key = {
 
 
 class NearbyIncidents(viewsets.ModelViewSet):
-# API incidenten in de buurt: op basis van filters stuurt de query antwoord terug uit de database
-# op basis van locatie, tijd en reiwijdte     
+    """Returns incidents nearby set point"""   
     
     model = Incidents
     serializer_class = IncidentsSerializer
@@ -168,6 +167,9 @@ class IncidentHitList(viewsets.ModelViewSet):
 
     def list(self, request, **kwargs):
         user = self.request.GET.get('user')
+        if user != None:
+            pass
+        else: user = 'admin'
         #returns *all* hits. future: add param that defines nr of days. 
         queryset = IncidentHits.objects.filter(user__in=user)
         hit_list = serializers.serialize("json", queryset)
