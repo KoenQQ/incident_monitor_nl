@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { List, FlexboxGrid, Icon } from 'rsuite';
+import { getUser, getIncidentHits } from '/Users/koendebrauw/Documents/app_dev/incident_monitor_nl_1/frontend/api/Api.js'
 
 
 // testdata voor list
@@ -80,13 +81,23 @@ const data = [
     fontSize: '1.2em',
     fontWeight: 500
   };
+
   
   class IncidentList extends React.Component {
     constructor() {
       super();
       this.renderRaise = this.renderRaise.bind(this);
+      this.state = {
+          user: ''
+      }
     }
-  
+    
+    componentDidMount()  {
+        this.setState({user: getUser()})
+        console.log('hello' + this.state.user)
+    }
+
+
     renderRaise(number) {
       const isPositive = number > 0;
       const isNegative = number < 0;
