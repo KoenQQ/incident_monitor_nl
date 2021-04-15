@@ -1,0 +1,8 @@
+
+
+// Use this file to test API's 
+// documentation: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+
+GET https://www.incidentradar.com/scraper/api/incidentHitList
+    ?user=admin

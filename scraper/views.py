@@ -167,11 +167,8 @@ class IncidentHitList(viewsets.ModelViewSet):
 
     def list(self, request, **kwargs):
         user = self.request.GET.get('user')
-        if user != None:
-            pass
-        else: user = 'admin'
         #returns *all* hits. future: add param that defines nr of days. 
-        queryset = IncidentHits.objects.filter(user__in=user)
+        queryset = IncidentHits.objects.filter(user__exact=user)
         hit_list = serializers.serialize("json", queryset)
 
         return HttpResponse(hit_list)
