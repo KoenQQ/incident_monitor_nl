@@ -12,4 +12,5 @@ GET https://www.incidentradar.com/scraper/api/incidentHitList
 
 
 GET https://www.incidentradar.com/scraper/current_user 
-    
+Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjE4OTA2MDEwLCJlbWFpbCI6ImtvZW5AY2FydGhhLmlvIn0.xkTwnuQSItCCrrGvSvs100eP4yc4-1UEUYNjjvs_4M4
+

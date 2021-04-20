@@ -21,17 +21,15 @@ class AppRoute extends Component {
       logged_in: localStorage.getItem('token') ? true : false,
       username: ''
     };
-    // console.log('token is: ',  localStorage.getItem('token'), typeof localStorage.getItem('token'))
-    // console.log('counts as logged in: ' + logged_in)
     
   }
-  
+
   ComponentDidMount() {
     //if logged in, change username in state
     // naast naam aanmaken doet dit niets volgens mij. 
     // iets vergelijkbaars aanmaken om extra controle uit te voeren
     if (this.state.logged_in) {
-      fetch('http://localhost:8000/scraper/current_user/', { 
+      fetch('https://localhost:8000/scraper/current_user/', { 
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -40,14 +38,13 @@ class AppRoute extends Component {
         .then(json => {
           this.setState({ username: json.username });
           this.setState({logged_in: true})
-          console.log(json.username)
         });
         
       }
   }
   
 
-  // signup not yet implemented
+  // SIGNUP NOT YET IMPLEMENTED
   // handle_signup = (e, data) => {
   //   e.preventDefault();
   //   fetch('http://localhost:8000/scraper/UserList/', {

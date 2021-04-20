@@ -15,8 +15,9 @@ router.register(r'incidentHitList', views.IncidentHitList, basename='IncidentHit
 urlpatterns = [
     path('', MapView.as_view()),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('current_user/', current_user),
+    
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # path('users/', UserList.as_view())
 ]
 

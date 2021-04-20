@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
       return newState;
     });
   };
-
+  
 
   
   handle_login = (e, data) => {
@@ -46,6 +46,7 @@ class LoginForm extends React.Component {
         this.setState({
           username: json.user.username
         });
+        console.log("user: " + json.user.username)
         // console.log(json.token, typeof json.token)
         // console.log(this.state.username)
 

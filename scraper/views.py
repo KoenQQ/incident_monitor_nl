@@ -160,15 +160,18 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
 
 class IncidentHitList(viewsets.ModelViewSet):
-    """ returns all hits pertaining incidents nearby client locations """
+    """returns all hits pertaining incidents nearby client locations 
+    filtered based on user & number of days"""
 
     model = IncidentHits
     serializer_class = IncidentHitsSerializer
 
     def list(self, request, **kwargs):
-        user = self.request.GET.get('user')
+        user = request.user
+        # days = self.request.GET.get('days')
         #returns *all* hits. future: add param that defines nr of days. 
         queryset = IncidentHits.objects.filter(user__exact=user)
+        # .filter(pub_date__gte=datetime.now()-timedelta(days=days))
         hit_list = serializers.serialize("json", queryset)
 
         return HttpResponse(hit_list)

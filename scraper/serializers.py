@@ -1,7 +1,7 @@
-# serializers.py
+# serializers
 from rest_framework import serializers
 from .models import Incidents, ClientLocations, IncidentHits
-# from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 
 class IncidentsSerializer(serializers.HyperlinkedModelSerializer):
@@ -13,7 +13,9 @@ class IncidentsSerializer(serializers.HyperlinkedModelSerializer):
 class IncidentHitsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = IncidentHits
-        fields = ('monitorcode', 'comment', 'priority_code', 'emergency_service', 'location', 'region', 'pub_date', 'name', 'customer_id', 'description', 'address', 'location', 'user')
+        fields = ('monitorcode', 'comment', 'priority_code', 'emergency_service', 
+        'location', 'region', 'pub_date', 'name', 'customer_id', 'description', 
+        'address', 'location', 'user')
 
 class UserSerializer(serializers.ModelSerializer):
     
@@ -24,7 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
 class ClientLocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ClientLocations
-        fields = ('name', 'customer_id', 'description', 'address', 'location', 'user')
+        fields = ('name', 'customer_id', 'description', 'address', 
+        'location', 'user')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -55,6 +58,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
 class ClientLocationsWithToken(serializers.ModelSerializer):
 
+    #WIP
     token = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)
 

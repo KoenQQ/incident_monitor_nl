@@ -94,9 +94,8 @@ const data = [
     
     componentDidMount()  {
         this.setState({user: getUser()})
-        console.log('hello' + this.state.user)
+        console.log('hello ' + this.state.user.typeOf)
     }
-
 
     renderRaise(number) {
       const isPositive = number > 0;
