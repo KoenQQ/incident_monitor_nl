@@ -168,6 +168,7 @@ class IncidentHitList(viewsets.ModelViewSet):
 
     def list(self, request, **kwargs):
         user = request.user
+        print(user, ' ',  type(user))
         # days = self.request.GET.get('days')
         #returns *all* hits. future: add param that defines nr of days. 
         queryset = IncidentHits.objects.filter(user__exact=user)
