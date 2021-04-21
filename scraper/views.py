@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework import viewsets, permissions, status
-from scraper.serializers import IncidentsSerializer, IncidentHitsSerializer, UserSerializer, UserSerializerWithToken
-from .models import Incidents, IncidentHits
+from scraper.serializers import IncidentsSerializer, IncidentHitsSerializer, UserSerializer, UserSerializerWithToken, ClientLocationSerializer
+from .models import Incidents, IncidentHits, ClientLocations
 import django_filters
 from django.views.generic import TemplateView
 from django.views import generic
@@ -51,7 +51,6 @@ def return_degrees(e):
                 degrees_range = degrees
         return degrees_range
 
-#vertaalt km van frontend naar degrees voor backend query
 distance_key = {
         0.5: 0.0045,
         1: 0.009,
@@ -97,7 +96,7 @@ distance_key = {
 
 
 class NearbyIncidents(viewsets.ModelViewSet):
-    """Returns incidents nearby set point"""   
+    """ Returns incidents nearby set point. """   
     
     model = Incidents
     serializer_class = IncidentsSerializer
@@ -115,7 +114,6 @@ class NearbyIncidents(viewsets.ModelViewSet):
 
         #location 
         point = self.request.GET.get('location-list')
-        
 
         #searchrange
         searchRange = self.request.GET.get('searchRange')
@@ -149,45 +147,56 @@ class NearbyIncidents(viewsets.ModelViewSet):
         else: 
             ambuFilter = ''
 
-        
-        #actual filter
+        #queryset
         queryset = Incidents.objects.filter(pub_date__gte=datetime.now()-timedelta(days=dateRange)).filter(location__dwithin=(point, searchRange)).filter(comment__contains=comment).filter(emergency_service__in=finalFilter)
         recent_incidents_list = queryset
         updated_incidents_list = serializers.serialize("json", recent_incidents_list)
 
-        #answer
         return HttpResponse(updated_incidents_list)
 
 
 class IncidentHitList(viewsets.ModelViewSet):
     """returns all hits pertaining incidents nearby client locations 
-    filtered based on user & number of days"""
+    filtered based on user & number of days. """
 
     model = IncidentHits
     serializer_class = IncidentHitsSerializer
 
     def list(self, request, **kwargs):
         user = request.user
-        print(user, ' ',  type(user))
         # days = self.request.GET.get('days')
         #returns *all* hits. future: add param that defines nr of days. 
-        queryset = IncidentHits.objects.filter(user__exact=user)
+        queryset = IncidentHits.objects.filter(user__exact=user)[:100]
         # .filter(pub_date__gte=datetime.now()-timedelta(days=days))
         hit_list = serializers.serialize("json", queryset)
 
         return HttpResponse(hit_list)
 
 
- 
+class ClientLocationList(viewsets.ModelViewSet):
+    """ Returns all locations that a user is 
+    tracking in the app. """
+
+
+    model = ClientLocations
+    serializer_class = ClientLocationSerializer
+
+    def list(self, request, **kwargs):
+        user = request.user
+        queryset = ClientLocations.objects.filter(user__exact=user)
+        client_list = serializers.serialize("json", queryset)
+
+        return HttpResponse(client_list)
+
+
 class MapView(TemplateView):
     template_name = "map.html"
 
 
 @api_view(['GET'])
 def current_user(request):
-    """
-    Determine the current user by their token, and return their data
-    """
+    """ Determine the current user by their token, 
+    and return their data. """
     
     serializer = UserSerializer(request.user)
     return Response(serializer.data)

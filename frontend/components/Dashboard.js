@@ -1,5 +1,6 @@
 import React from 'react'
 import IncidentList from './Elements/IncidentList.js'
+import ClientTable from './Elements/ClientTable.js'
 import Axios from 'axios'
 
 //this will be the account dashboard
@@ -18,9 +19,14 @@ class Dashboard extends React.Component {
     render(){
        return(
             <div>
-                <h2>Dashboard</h2>
-                <div>
+                
+                <div className='incidentWidth'>
+                    <div>
                     <IncidentList/>
+                    </div>    
+                </div>
+                <div className='clientWidth'>
+                    <ClientTable/>
                 </div>
             </div>
             

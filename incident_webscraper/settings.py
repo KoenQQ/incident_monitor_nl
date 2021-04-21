@@ -15,6 +15,7 @@ import dotenv
 from dotenv import load_dotenv
 import dj_database_url
 import os
+import datetime
 # from secrets import SECRET_KEY1
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -141,6 +142,7 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'incident_webscraper.utils.my_jwt_response_handler',
     'JWT_AUTH_HEADER_PREFIX': 'Token',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
 }
 
 TEMPLATES = [

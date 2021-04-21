@@ -11,6 +11,25 @@
     padding: 6px;
 }
 
+.listStyle{  
+    width:800px;  
+}
+
+.incidentWidth{
+    position: fixed;
+    top: 60px;
+    left: 20px;
+    height: 1200px;
+}
+
+.clientWidth{
+    position: fixed;
+    top: 60px;
+    left: 940px;
+    height: 1200px;
+}
+
+
 .loginExplainer{
     position: fixed;
     top: 200px;

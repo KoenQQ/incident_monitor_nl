@@ -9,7 +9,7 @@ import Login from "../components/Login.js";
 import ErrorMessage from "../components/ErrorMessage.js";
 import PrivateRoute from './PrivateRoute'
 import Dashboard from './Dashboard.js'
-import {Button, ButtonToolbar, Header} from 'rsuite';
+import {Button, ButtonToolbar, Header, Navbar} from 'rsuite';
 
 
 
@@ -75,20 +75,28 @@ class AppRoute extends Component {
     return (
     <Router>
       <div>
+        <Navbar>
+        <Navbar.Header>
+          <h2>Incidentradar</h2>
+        </Navbar.Header>
+        <Navbar.Body>
         <Header>
           <div className='navbarStyle'>
             <ButtonToolbar>
               {/* {this.state.logged_in == true && <Link to="/"><Button>Home</Button></Link>}
-              {this.state.logged_in == true && <Link to="/account"><Button>Account</Button></Link>} */}
+              {this.state.logged_in == true && <Link to="/dashboard"><Button>dashboard</Button></Link>} */}
               {this.state.logged_in == true && <Button onClick={this.handle_logout}>Logout</Button>}
             </ButtonToolbar>   
           </div>
           </Header>
+        </Navbar.Body>
         <PrivateRoute authed = {this.state.logged_in} exact path="/" component={Application}/>
         <Route handleLoginChange = {this.handleLoginChange} path="/login" component={Login} />
         <PrivateRoute authed = {this.state.logged_in} exact path="/dashboard" component={Dashboard} />
         {/* <Route component={ErrorMessage} /> */}
+      </Navbar>
       </div>
+    
     </Router>
   );
   }

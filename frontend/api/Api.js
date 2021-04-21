@@ -10,9 +10,6 @@ import axios from 'axios'
         return x;
     });
 
-    // voegt automatisch JWT token header toe aan alle verzoeken. 
-    // axios.defaults.headers.common['WWW-Authenticate'] = localStorage.getItem('token');
-    
     // interceptor that puts call details in console
     axios.interceptors.response.use(x => {
     console.log(x)
@@ -37,12 +34,23 @@ export function getUser() {
 }
 
 // returns hits relevant for the user
-export function getIncidentHits(username) {
+export function getIncidentHits() {
     return axios.get( 'https://www.incidentradar.com/scraper/api/incidentHits', {
         headers: {
             Authorization: `Token ${localStorage.getItem('token')}`
         }
 
+    })
+
+}
+
+
+// returns tracked/client locations for the user
+export function getClientLocations() {
+    return axios.get( 'URL', {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+        }
     })
 
 }
