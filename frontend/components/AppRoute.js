@@ -77,7 +77,7 @@ class AppRoute extends Component {
       <div>
         <Navbar>
         <Navbar.Header>
-          <h2>Incidentradar</h2>
+          <h2></h2>
         </Navbar.Header>
         <Navbar.Body>
         <Header>
