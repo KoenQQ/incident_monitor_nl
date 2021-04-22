@@ -177,7 +177,6 @@ class ClientLocationList(viewsets.ModelViewSet):
     """ Returns all locations that a user is 
     tracking in the app. """
 
-
     model = ClientLocations
     serializer_class = ClientLocationSerializer
 

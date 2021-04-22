@@ -9,7 +9,7 @@ router.register(r'incidents', views.IncidentsViewSet, basename='incidents')
 router.register(r'location', views.NearbyIncidents, basename='location')
 router.register(r'incidentHits', views.IncidentHitsViewSet, basename='IncidentHits')
 router.register(r'incidentHitList', views.IncidentHitList, basename='IncidentHitList')
-router.register(r'clientLocationList', views.ClientLocationList, basename='ClientLocationList')
+router.register(r'clientlocationlist', views.ClientLocationList, basename='clientLocationList')
 
 
 # Wire up our API using automatic URL routing.

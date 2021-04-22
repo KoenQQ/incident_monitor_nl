@@ -47,7 +47,7 @@ export function getIncidentHits() {
 
 // returns tracked/client locations for the user
 export function getClientLocations() {
-    return axios.get( 'https://www.incidentradar.com/scraper/api/clientlocationlist/', {
+    return axios.get( 'https://www.incidentradar.com/scraper/api/clientlocationlist', {
         headers: {
             Authorization: `Token ${localStorage.getItem('token')}`
         }
