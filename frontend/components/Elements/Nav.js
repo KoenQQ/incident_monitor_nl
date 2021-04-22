@@ -1,26 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Navbar, Dropdown, ButtonToolbar} from 'rsuite'
 
-function Nav(props) {
-  const logged_out_nav = (
-    <ul>
-      <li onClick={() => props.display_form('login')}>login</li>
-      <li onClick={() => props.display_form('signup')}>signup</li>
-    </ul>
-  );
+class Nav extends React.Component {
 
-  const logged_in_nav = (
-    <ul>
-      <li onClick={props.handle_logout}>logout</li>
-    </ul>
-  );
-  return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+render(){
+    return(
+        <Navbar className='nav'>
+            <Navbar.Header>
+            <a href="#">
+                Incidentradar
+            </a>
+            </Navbar.Header>
+            <Navbar.Body>
+                
+            </Navbar.Body>
+         </Navbar> 
+    );
 }
 
-export default Nav;
+}
 
-Nav.propTypes = {
-  logged_in: PropTypes.bool.isRequired,
-  display_form: PropTypes.func.isRequired,
-  handle_logout: PropTypes.func.isRequired
-};
+export default Nav

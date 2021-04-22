@@ -44,7 +44,6 @@ export function getIncidentHits() {
 
 }
 
-
 // returns tracked/client locations for the user
 export function getClientLocations() {
     return axios.get( 'https://www.incidentradar.com/scraper/api/clientlocationlist', {
@@ -53,4 +52,24 @@ export function getClientLocations() {
         }
     })
 
+}
+
+// add a new client location to tracked locations
+export function addClientLocation(data) {
+    return axios.post( 'https://www.incidentradar.com/scraper/api/addclientlocation', {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(data)
+    })
+}
+
+// remove client location from tracked locations
+export function removeClientLocation(data) {
+    return axios.delete( 'https://www.incidentradar.com/scraper/api/addclientlocation', {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(data)
+    })
 }

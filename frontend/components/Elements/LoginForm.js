@@ -66,7 +66,12 @@ class LoginForm extends React.Component {
   render() {
     return (
       <Form fluid >
-        <h4>Login</h4>
+        <div >
+        <h4 style={{
+          color:'#2A3C47',
+          top: '40px'}}>Login</h4>
+        </div>
+        
         <br />
         <FormGroup>
           <ControlLabel>Username</ControlLabel>

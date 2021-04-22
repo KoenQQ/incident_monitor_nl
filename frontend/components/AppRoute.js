@@ -9,8 +9,8 @@ import Login from "../components/Login.js";
 import ErrorMessage from "../components/ErrorMessage.js";
 import PrivateRoute from './PrivateRoute'
 import Dashboard from './Dashboard.js'
-import {Button, ButtonToolbar, Header, Navbar} from 'rsuite';
-
+import {Button, ButtonToolbar, Header} from 'rsuite';
+import Nav from '../components/Elements/Nav.js'
 
 
 class AppRoute extends Component {
@@ -75,26 +75,26 @@ class AppRoute extends Component {
     return (
     <Router>
       <div>
-        <Navbar>
-        <Navbar.Header>
-          <h2></h2>
-        </Navbar.Header>
-        <Navbar.Body>
+        {/* <Nav className='nav' /> */}
         <Header>
-          <div className='navbarStyle'>
-            <ButtonToolbar>
-              {/* {this.state.logged_in == true && <Link to="/"><Button>Home</Button></Link>}
-              {this.state.logged_in == true && <Link to="/dashboard"><Button>dashboard</Button></Link>} */}
-              {this.state.logged_in == true && <Button onClick={this.handle_logout}>Logout</Button>}
-            </ButtonToolbar>   
+          <div>
+            {/* <h1 className='title'>Incidentradar</h1> */}
           </div>
-          </Header>
-        </Navbar.Body>
+          <div className='navbarStyle'>
+          <ButtonToolbar>
+                {/* {this.state.logged_in == true && <Link to="/"><Button>Home</Button></Link>}
+                {this.state.logged_in == true && <Link to="/dashboard"><Button>Dashboard</Button></Link>} */}
+                {this.state.logged_in == true && <Button onClick={this.handle_logout}>Logout</Button>}
+                {/* <IconButton icon={<SearchIcon />}>Find address</IconButton> */}
+           </ButtonToolbar> 
+          </div>
+        </Header>
+      
         <PrivateRoute authed = {this.state.logged_in} exact path="/" component={Application}/>
         <Route handleLoginChange = {this.handleLoginChange} path="/login" component={Login} />
         <PrivateRoute authed = {this.state.logged_in} exact path="/dashboard" component={Dashboard} />
         {/* <Route component={ErrorMessage} /> */}
-      </Navbar>
+      
       </div>
     
     </Router>

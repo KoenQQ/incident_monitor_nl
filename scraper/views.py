@@ -219,28 +219,20 @@ def current_user(request):
 
 
 
-# class ClientLocations(APIView):
-#     """
-#     Add and remove client locations 
-#     """
+class ClientLocations(APIView):
+    """
+    Add and remove client locations 
+    """
 
-#     def post(self, request, format=None):
-#         serializer = ClientLocationsWithToken(data=request.data)
-#         if serializer.is_valid():
-#             #transform postcode into point 
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-#     def get(self, request, format=None):
-#         # de axios call naar deze get request komt vanuit een gebruiker en moet _alle_ locaties terugsturen voor in de tabel
+    def post(self, request, format=None):
+        serializer = ClientLocationsWithToken(data=request.data)
         
-#         serializer = #enter serializer hier
-#         if serializer.is_valid():
-#             user = self.request.GET.get('user')
-#             queryset = ClientLocations.objects.filter(user__in=user)
-#             updated_queryset = serializers.serialize("json", queryset)
-#             return HttpResponse(updated_queryset, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid():
+            user
+            #transform postcode into point 
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
 
