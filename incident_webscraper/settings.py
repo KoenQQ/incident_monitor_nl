@@ -224,6 +224,13 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_MANIFEST_STRICT = False
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
+# Other stuff
+
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
