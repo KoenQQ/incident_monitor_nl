@@ -255,7 +255,7 @@ class Application extends React.Component {
             <img className='logo_home' src={logo_regular} />
           </div>
           <div className='introbarStyle'>
-            <div>Click on the map to explore recent incidents in an area </div>
+            <div>Click on the map to explore recent incidents in an area. </div>
           </div>
           <div className='hline'/>
           <div className='filterStyle'> 
