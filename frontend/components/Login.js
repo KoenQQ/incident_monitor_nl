@@ -39,7 +39,7 @@ class Login extends React.Component {
                 <div> 
                <div className='loginExplainer'>
                 <div>
-                <img className='logo_home' src={`url('https://i.imgur.com/f59aONW.png')`} /> 
+                <img className='logo_home' src="url('https://i.imgur.com/f59aONW.png')" /> 
                 </div>
                 <div className='introbarStyle'>
                     <div>Verzekeraar, projectontwikkelaar, buurtwacht of beveiliging?
