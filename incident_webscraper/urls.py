@@ -11,5 +11,7 @@ urlpatterns = [
     path('scraper/', include('scraper.urls')),
     path('token-auth/', obtain_jwt_token),
     path('accounts/', include('django.contrib.auth.urls'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 
+
+# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
