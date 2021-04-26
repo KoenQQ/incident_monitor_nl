@@ -7,7 +7,7 @@ import * as axios from 'axios';
 import "/templates/site.css";
 import FilterSelector from './Elements/FilterSelector.js';
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import logo_regular from 'frontend/templates/logo_regular.png'
+import logo_regular from './templates/logo_regular.png'
 
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2RlYnJhdXciLCJhIjoiY2p4ZnhyaTUzMDB1eTQxbnVwOG9jbHBwdSJ9.L5RCSfMVV7RYpq1a45E68g';
