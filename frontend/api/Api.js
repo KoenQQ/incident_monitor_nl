@@ -35,7 +35,7 @@ export function getUser() {
 
 // returns hits relevant for the user
 export function getIncidentHits() {
-    return axios.get( 'https://www.incidentradar.com/scraper/api/incidentHits', {
+    return axios.get( 'https://www.incidentradar.com/scraper/api/incidentHits/', {
         headers: {
             Authorization: `Token ${localStorage.getItem('token')}`
         }
@@ -44,13 +44,32 @@ export function getIncidentHits() {
 
 }
 
-
 // returns tracked/client locations for the user
 export function getClientLocations() {
-    return axios.get( 'URL', {
+    return axios.get( 'https://www.incidentradar.com/scraper/api/clientlocationlist', {
         headers: {
             Authorization: `Token ${localStorage.getItem('token')}`
         }
     })
 
+}
+
+// add a new client location to tracked locations
+export function addClientLocation(data) {
+    return axios.post( 'https://www.incidentradar.com/scraper/api/addclientlocation', {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(data)
+    })
+}
+
+// remove client location from tracked locations
+export function removeClientLocation(data) {
+    return axios.delete( 'https://www.incidentradar.com/scraper/api/addclientlocation', {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(data)
+    })
 }

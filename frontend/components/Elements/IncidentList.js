@@ -57,6 +57,9 @@ const data = [
       uvRaise: 132
     }
   ];
+
+  const data2 = ['Roses are red', 'Violets are blue', 'Sugar is sweet', 'And so are you'];
+
   const styleCenter = {
     display: 'flex',
     justifyContent: 'center',
@@ -88,13 +91,18 @@ const data = [
       super();
       this.renderRaise = this.renderRaise.bind(this);
       this.state = {
-          user: ''
+          user: '',
+          hits: []
       }
     }
-    
-    componentDidMount()  {
-        this.setState({user: getUser()})
-        console.log('hello ' + this.state.user.typeOf)
+
+    async componentDidMount()  {
+        await getIncidentHits()
+            .then(results => { 
+            this.results = results.data
+            const hitzone = results.data
+            this.setState({hits: hitzone})
+            });
     }
 
     renderRaise(number) {
@@ -112,78 +120,95 @@ const data = [
         </span>
       );
     }
-  
+
+
     render() {
-      return (
-        <List hover>
-          {data.map((item, index) => (
-            <List.Item key={item['title']} index={index}>
-              <FlexboxGrid>
-                {/*icon*/}
-                <FlexboxGrid.Item colspan={2} style={styleCenter}>
-                  <Icon
-                    icon={item['icon']}
-                    style={{
-                      color: 'darkgrey',
-                      fontSize: '1.5em'
-                    }}
-                  />
-                </FlexboxGrid.Item>
-                {/*base info*/}
-                <FlexboxGrid.Item
-                  colspan={6}
-                  style={{
-                    ...styleCenter,
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <div style={titleStyle}>{item['title']}</div>
-                  <div style={slimText}>
-                    <div>
-                      <Icon icon="user-circle-o" />
-                      {' ' + item['creator']}
-                    </div>
-                    <div>{item['date']}</div>
-                  </div>
-                </FlexboxGrid.Item>
-                {/*peak data*/}
-                <FlexboxGrid.Item colspan={6} style={styleCenter}>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={slimText}>Top Value</div>
-                    <div style={dataStyle}>{item['peak'].toLocaleString()}</div>
-                  </div>
-                  {this.renderRaise(item['peakRaise'])}
-                </FlexboxGrid.Item>
-                {/*uv data*/}
-                <FlexboxGrid.Item colspan={6} style={styleCenter}>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={slimText}>UV</div>
-                    <div style={dataStyle}>{item['uv'].toLocaleString()}</div>
-                  </div>
-                  {this.renderRaise(item['uvRaise'])}
-                </FlexboxGrid.Item>
-                {/*uv data*/}
-                <FlexboxGrid.Item
-                  colspan={4}
-                  style={{
-                    ...styleCenter
-                  }}
-                >
-                  {/* link naar kaart   */}
-                  <a href="#">View</a> 
-                  <span style={{ padding: 5 }}>|</span>
-                  {/* link naar adres in tabel */}
-                  <a href="#">Customer</a>
-                </FlexboxGrid.Item>
-              </FlexboxGrid>
-            </List.Item>
-          ))}
-        </List>
+        return(
+        <div className= 'listStyle'>
+          <List bordered hover >
+            {this.state.hits.map((item) => (
+              <List.Item key={item['pub_date']} >
+                {item.monitorcode} <br></br>
+                {item.pub_date}
+              </List.Item>
+            ))}
+          </List>
+        </div>
       );
+      }
     }
-  }
+
+//     render() {
+//       return (
+//         <List hover>
+//           {data.map((item) => (
+//             <List.Item key={item['title']} index={index}>
+//               <FlexboxGrid>
+//                 {/*icon*/}
+//                 <FlexboxGrid.Item colspan={2} style={styleCenter}>
+//                   <Icon
+//                     icon={item['icon']}
+//                     style={{
+//                       color: 'darkgrey',
+//                       fontSize: '1.5em'
+//                     }}
+//                   />
+//                 </FlexboxGrid.Item>
+//                 {/*base info*/}
+//                 <FlexboxGrid.Item
+//                   colspan={6}
+//                   style={{
+//                     ...styleCenter,
+//                     flexDirection: 'column',
+//                     alignItems: 'flex-start',
+//                     overflow: 'hidden'
+//                   }}
+//                 >
+//                   <div style={titleStyle}>{item['monitorcode']}</div>
+//                   <div style={slimText}>
+//                     <div>
+//                       <Icon icon="user-circle-o" />
+//                       {' ' + item['emergency_service']}
+//                     </div>
+//                     <div>{item['pub_date']}</div>
+//                   </div>
+//                 </FlexboxGrid.Item>
+//                 {/*peak data*/}
+//                 <FlexboxGrid.Item colspan={6} style={styleCenter}>
+//                   <div style={{ textAlign: 'right' }}>
+//                     <div style={slimText}>Top Value</div>
+//                     <div style={dataStyle}>{item['address'].toLocaleString()}</div>
+//                   </div>
+//                   {this.renderRaise(item['peakRaise'])}
+//                 </FlexboxGrid.Item>
+//                 {/*uv data*/}
+//                 <FlexboxGrid.Item colspan={6} style={styleCenter}>
+//                   <div style={{ textAlign: 'right' }}>
+//                     <div style={slimText}>UV</div>
+//                     <div style={dataStyle}>{item['uv'].toLocaleString()}</div>
+//                   </div>
+//                   {this.renderRaise(item['uvRaise'])}
+//                 </FlexboxGrid.Item>
+//                 {/*uv data*/}
+//                 <FlexboxGrid.Item
+//                   colspan={4}
+//                   style={{
+//                     ...styleCenter
+//                   }}
+//                 >
+//                   {/* link naar kaart [switch naar map view, met zoom niveau & op basis van location]   */}
+//                   <a href="#">View on map</a> 
+//                   <span style={{ padding: 5 }}>|</span>
+//                   {/* link naar adres in tabel */}
+//                   <a href="#">Customer</a>
+//                 </FlexboxGrid.Item>
+//               </FlexboxGrid>
+//             </List.Item>
+//           ))}
+//         </List>
+//       );
+//     }
+//   }
   
   export default IncidentList
   

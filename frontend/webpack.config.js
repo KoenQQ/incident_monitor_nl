@@ -18,14 +18,15 @@ module.exports = {
             test: /\.css$/i,
             use: ["style-loader", "css-loader"],
         },
-        // {
-        //   test: /\.(jpe?g|png|gif|svg)$/i,
-        //   use: {
-        //   loader: [
-        //     'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-        //     'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        //   ]}
-        // } 
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
+        },
+        
       ]
     },
     plugins: [
@@ -34,7 +35,7 @@ module.exports = {
         process: 'process/browser',
       }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'process.env.NODE_ENV': JSON.stringify("development"),
         'process.env.NODE_DEBUG': JSON.stringify(process.env.NODE_DEBUG),
         'process.type': JSON.stringify(process.type),
         'process.version': JSON.stringify(process.version),

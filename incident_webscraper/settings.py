@@ -36,7 +36,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
- # Debugging in heroku live
+# Debugging in heroku live
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -142,7 +142,7 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'incident_webscraper.utils.my_jwt_response_handler',
     'JWT_AUTH_HEADER_PREFIX': 'Token',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=1200),
 }
 
 TEMPLATES = [
@@ -223,6 +223,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_MANIFEST_STRICT = False
+
+
+# Other stuff
 
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']

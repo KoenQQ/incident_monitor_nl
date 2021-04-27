@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "Index.js", 
+  "main": "Index.js",
   "scripts": {
     "dev": "webpack --mode development --watch --hot --entry ./components/Index.js --output-path ./static",
     "build": "webpack --mode production --watch --hot --entry ./components/Index.js --output-path ./static"
@@ -17,6 +17,7 @@
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
     "path-browserify": "^1.0.1",
     "process": "0.11.10",
     "react": "^17.0.1",
@@ -36,6 +37,7 @@
     "react-router-dom": "^5.2.0",
     "rsuite": "^4.8.9",
     "source-map-loader": "^2.0.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "url-loader": "^4.1.1"
   }
 }

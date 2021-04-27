@@ -1,18 +1,44 @@
 
 .dataHolder{
     position: fixed;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px grey;
+    top: 20px;
+    /* bottom: 400px; */
+    height: 650px;
+    left: 20px;
     display: inline-block;
     width: 320px;
-    background: #2A3C47;
+    background: linear-gradient(180deg, #ffffff 10%, #2A3C47 10%);
     z-index: 5 !important;
     padding: 6px;
 }
 
+.nav{
+    position: absolute;
+    color:#ffffff;
+    top:0;
+    z-index: 4 !important;
+}
+
+.title{
+    position: fixed;
+    color:#2A3C47;
+    text-shadow: 2px 2px 4px #ffffff;
+    left: 30px;
+    top: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: lighter;
+    font-size: 48px;
+}
+
 .listStyle{  
     width:800px;  
+}
+
+.logo_home{
+    width: 250px;
+    top: 4px;
 }
 
 .incidentWidth{
@@ -33,23 +59,26 @@
 .loginExplainer{
     position: fixed;
     top: 200px;
-    
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px grey;
     left: 300px;
     display: inline-block;
     width: 550px;
     height: 600px;
-    background: #2A3C47;
+    background: linear-gradient(180deg, #ffffff 10%, #2A3C47 10%);
     z-index: 5 !important;
     padding: 6px;
 }
 .loginHolder{
     position: fixed;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px grey;
     top: 500px;
     left: 900px;
     display: inline-block;
     width: 360px;
     height: 300px;    
-    background: #2A3C47;
+    background: linear-gradient(180deg, #ffffff 18%, #2A3C47 18%);
     color: #ffffff;
     z-index: 5 !important;
     padding: 6px;
@@ -178,6 +207,7 @@
     right: 0;
     left: 0;
     bottom: 0;
+    z-index: -1;
 }
 
 
