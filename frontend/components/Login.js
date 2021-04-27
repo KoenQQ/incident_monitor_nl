@@ -13,6 +13,7 @@ class Login extends React.Component {
         super(props);
         this.state = {
             logged_in: "",
+            url: 'https://i.imgur.com/f59aONW.png'
         };
     
     this.handleLoginChange = this.handleLoginChange.bind(this)
@@ -39,7 +40,7 @@ class Login extends React.Component {
                 <div> 
                <div className='loginExplainer'>
                 <div>
-                <img className='logo_home' src={logo_regular} /> 
+                <img className='logo_home' ssrc={this.props.url} /> 
                 </div>
                 <div className='introbarStyle'>
                     <div>Verzekeraar, projectontwikkelaar, buurtwacht of beveiliging?
