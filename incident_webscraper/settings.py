@@ -226,7 +226,6 @@ WHITENOISE_MANIFEST_STRICT = False
 
 
 # Other stuff
-
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'

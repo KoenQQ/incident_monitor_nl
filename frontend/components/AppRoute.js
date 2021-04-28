@@ -75,15 +75,7 @@ class AppRoute extends Component {
     return (
     <Router>
       <div>
-<<<<<<< HEAD
         {/* <Nav className='nav' /> */}
-=======
-        <Navbar>
-        <Navbar.Header>
-          <h2>Incidentradar</h2>
-        </Navbar.Header>
-        <Navbar.Body>
->>>>>>> parent of 12363914... Remove static files
         <Header>
           <div>
             {/* <h1 className='title'>Incidentradar</h1> */}

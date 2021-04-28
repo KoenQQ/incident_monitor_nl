@@ -252,7 +252,7 @@ class Application extends React.Component {
         <div></div>
         <div className='dataHolder'>
           <div>
-            <img className='logo_home' src={logo_regular} />
+            <img className='logo_home' src="https://i.imgur.com/f59aONW.png" />
           </div>
           <div className='introbarStyle'>
             <div>Click on the map to explore recent incidents in an area. </div>
