@@ -11,6 +11,8 @@ import Dashboard from './components/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 class AppRoute extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +30,7 @@ class AppRoute extends Component {
     // naast naam aanmaken doet dit niets volgens mij.
     // iets vergelijkbaars aanmaken om extra controle uit te voeren
     if (this.state.logged_in) {
-      fetch('https://localhost:8000/scraper/current_user/', {
+      fetch(`${apiUrl}/scraper/current_user/`, {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
         }
