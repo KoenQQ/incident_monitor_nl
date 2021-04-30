@@ -19,6 +19,13 @@ from django.forms.models import model_to_dict
 from django.core import serializers
 from django.contrib.auth.models import User
 import json
+from django.shortcuts import render
+from django.http import HttpResponse
+
+
+# basic homepage view
+def home_view(request,*args, **kwargs):
+    return HttpResponse("<h1>Hallo Thomas</h1>")
 
 
 
