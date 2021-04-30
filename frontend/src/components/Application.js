@@ -6,7 +6,10 @@ import logo from '../assets/logo_regular.png';
 
 import FilterSelector from './FilterSelector';
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN;
+
+// mapboxgl.accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN;
+mapboxgl.accessToken = 'pk.eyJ1Ijoia2RlYnJhdXciLCJhIjoiY2p4ZnhyaTUzMDB1eTQxbnVwOG9jbHBwdSJ9.L5RCSfMVV7RYpq1a45E68g';
+
 
 class Application extends React.Component {
   constructor(props) {

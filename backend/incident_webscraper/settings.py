@@ -73,7 +73,7 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 # Who can access the database
-ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp.com/', 'http://www.incidentradar.com/', 'https://www.incidentradar.com/', 'https://www.api.incidentradar.com/']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp.com/', 'http://www.incidentradar.com/', 'https://www.incidentradar.com/', 'https://www.api.incidentradar.com/', 'http://localhost:3000/']
 
 CORS_ORIGIN_ALLOW_ALL = False
 
@@ -84,7 +84,8 @@ CORS_ORIGIN_WHITELIST = (
        'http://127.0.0.1:8000', 
        'https://incident-monitor-nl.herokuapp.com', 
        'http://www.incidentradar.com',
-       'https://www.incidentradar.com'
+       'https://www.incidentradar.com',
+       'http://localhost:3000'
 )
 
 # Application definition
