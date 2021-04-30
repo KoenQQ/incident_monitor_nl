@@ -7,15 +7,11 @@ scraper/migrations/__pycache__
 .env
 vb.xml
 cd
-.venv/ 
+.venv/
 .vscode/
 activate
 exit
 quit
 Dockerfile
-frontend/static
-!frontend/static/main.js
-frontend/node_modules
 node_modules
-frontend/__pycache__
 staticfiles
