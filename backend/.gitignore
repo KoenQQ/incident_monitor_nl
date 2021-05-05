@@ -5,7 +5,6 @@ scraper/management/commands/__pycache__
 incident_webscraper/secrets.py
 scraper/migrations/__pycache__
 .env
-vb.xml
 cd
 .venv/
 .vscode/

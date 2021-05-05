@@ -20,7 +20,6 @@ import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.exists(dotenv_file):
         load_dotenv(dotenv_path=dotenv_file)
@@ -34,7 +33,7 @@ if os.path.exists(dotenv_file):
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Debugging in heroku live
 LOGGING = {
@@ -74,7 +73,7 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 # Who can access the database
-ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp.com/', 'http://www.incidentradar.com/', 'https://www.incidentradar.com/']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://incident-monitor-nl.herokuapp.com/', 'http://www.incidentradar.com/', 'https://www.incidentradar.com/', 'https://www.api.incidentradar.com/', 'http://localhost:3000/']
 
 CORS_ORIGIN_ALLOW_ALL = False
 
@@ -85,7 +84,8 @@ CORS_ORIGIN_WHITELIST = (
        'http://127.0.0.1:8000', 
        'https://incident-monitor-nl.herokuapp.com', 
        'http://www.incidentradar.com',
-       'https://www.incidentradar.com'
+       'https://www.incidentradar.com',
+       'http://localhost:3000'
 )
 
 # Application definition
@@ -108,7 +108,7 @@ INSTALLED_APPS = [
 
     #local apps
     'scraper.apps.ScraperConfig',
-    'frontend',
+    # 'frontend'
 ]
 
 MIDDLEWARE = [
@@ -160,13 +160,6 @@ TEMPLATES = [
         },
     },
 ]
-
-# WEBPACK_LOADER = {
-#   'DEFAULT': {
-#     'BUNDLE_DIR_NAME': 'frontend/',
-#     'STATS_FILE': os.path.join(BASE_DIR, 'frontend/webpack-stats.json')
-#   }
-# }
 
 
 WSGI_APPLICATION = 'incident_webscraper.wsgi.application'

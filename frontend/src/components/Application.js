@@ -6,8 +6,9 @@ import logo from '../assets/logo_regular.png';
 
 import FilterSelector from './FilterSelector';
 
-mapboxgl.accessToken =
-  'pk.eyJ1Ijoia2RlYnJhdXciLCJhIjoiY2p4ZnhyaTUzMDB1eTQxbnVwOG9jbHBwdSJ9.L5RCSfMVV7RYpq1a45E68g';
+
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 class Application extends React.Component {
   constructor(props) {
@@ -99,7 +100,7 @@ class Application extends React.Component {
       // production: 'https://incident-monitor-nl.herokuapp.com/scraper/api/location/'
       axios
         .get(
-          'https://incident-monitor-nl.herokuapp.com/scraper/api/location/',
+          `${apiUrl}/scraper/api/location/`,
           {
             params: {
               dateRange: this.state.dateRange,
@@ -224,7 +225,6 @@ class Application extends React.Component {
           }
         });
       }
-      //hallo
 
       // window.CP.exitedLoop(1); test
       // var parsed = GeoJSON.parse(file, {Point: ['fields.latitude', 'fields.longitude']})

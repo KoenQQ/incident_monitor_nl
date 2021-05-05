@@ -12,6 +12,11 @@ import {
 //determines current environment for api calls & homepage routing
 var current_environment = window.location.origin;
 
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
+
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +42,7 @@ class LoginForm extends React.Component {
 
   handle_login = (e, data) => {
     e.preventDefault();
-    fetch(`${current_environment}/token-auth/`, {
+    fetch(`${apiUrl}/token-auth/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -59,7 +64,6 @@ class LoginForm extends React.Component {
         // console.log(body)
 
         // redirect to homepage
-
         window.location.href = `${current_environment}`;
       })
       .catch(error => {
@@ -87,7 +91,7 @@ class LoginForm extends React.Component {
         <FormGroup>
           <ControlLabel>Username</ControlLabel>
           <FormControl
-            name="name"
+            name="username"
             onChange={(value, event) => {
               this.handle_change(event);
             }}
