@@ -25,7 +25,7 @@ from django.http import HttpResponse
 
 # basic homepage view
 def home_view(request,*args, **kwargs):
-    return HttpResponse("<h1>Hallo Thomas</h1>")
+    return HttpResponse("<h1>API acces here</h1>")
 
 
 

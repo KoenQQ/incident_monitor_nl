@@ -23,7 +23,7 @@ class AppRoute extends Component {
       username: ''
     };
   }
-  
+
   componentDidMount() {
     // @Koen: Deze lifecycle hook werd nooit aangeroepen vanwege de hoofdletter C
     //if logged in, change username in state
