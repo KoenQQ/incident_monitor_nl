@@ -6,7 +6,6 @@ import logo from '../assets/logo_regular.png';
 
 import FilterSelector from './FilterSelector';
 
-
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN;
 const apiUrl = process.env.REACT_APP_API_URL;
 
