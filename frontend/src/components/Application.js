@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import React from 'react';
 
 import logo from '../assets/logo_regular.png';
