@@ -14,3 +14,8 @@ quit
 Dockerfile
 node_modules
 staticfiles
+*/*/*/__pycache__/
+
+*/*/__pycache__/
+
+*/__pycache__/
