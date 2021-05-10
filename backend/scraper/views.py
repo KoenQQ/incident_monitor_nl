@@ -175,8 +175,9 @@ class IncidentHitList(viewsets.ModelViewSet):
         days = self.request.GET.get('days')
         #returns *all* hits. future: add param that defines nr of days. 
         queryset = IncidentHits.objects.filter(user__exact=user).filter(emergency_service__in=finalFilter).filter(pub_date__gte=datetime.now()-timedelta(days=days))
+        print(queryset)
         hit_list = serializers.serialize("json", queryset)
-        
+        print(hit_list)
         return HttpResponse(hit_list)
 
 
