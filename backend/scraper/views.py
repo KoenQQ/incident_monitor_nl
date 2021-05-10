@@ -171,9 +171,10 @@ class IncidentHitList(viewsets.ModelViewSet):
 
     def list(self, request, **kwargs):
         user = request.user
+        finalFilter = ['pol', 'br']
         # days = self.request.GET.get('days')
         #returns *all* hits. future: add param that defines nr of days. 
-        queryset = IncidentHits.objects.filter(user__exact=user)[:100]
+        queryset = IncidentHits.objects.filter(user__exact=user).filter(emergency_service__in=finalFilter)[:100]
         # .filter(pub_date__gte=datetime.now()-timedelta(days=days))
         hit_list = serializers.serialize("json", queryset)
 
@@ -226,7 +227,7 @@ def current_user(request):
 
 
 
-class ClientLocations(APIView):
+class ClientLocationsAction(APIView):
     """
     Add and remove client locations 
     """
