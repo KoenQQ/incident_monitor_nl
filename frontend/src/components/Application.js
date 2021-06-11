@@ -118,7 +118,7 @@ class Application extends React.Component {
 
           //update this.state.array with query number results
           this.setState({ array: this.results.length });
-
+            
           // if layer exists remove old one
           if (map.getSource('locaties')) {
             map.removeLayer('locaties_waddan');
@@ -165,16 +165,7 @@ class Application extends React.Component {
             var pub_date = e.features[0].properties.pub_date;
 
             // console.log(coordinates);
-            console.log(monitorcode);
-
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-
-            // while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            // coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            // }
-
+            console.log(monitorcode)
             popup_extra
               .setLngLat(coordinates)
               .setHTML(

@@ -116,7 +116,8 @@ class NearbyIncidents(viewsets.ModelViewSet):
         ### URL FILTERS ###
 
         #date
-        dateRange = self.request.GET.get('dateRange')
+        # dateRange = self.request.GET.get('dateRange')
+        dateRange = 120
         dateRange = int(dateRange)
 
         #location 

@@ -36,9 +36,12 @@ export function getUser() {
 
 // returns hits relevant for the user
 export function getIncidentHits() {
-  return axios.get(`${apiUrl}/scraper/api/incidentHits/`, {
+  return axios.get(`https://api.incidentradar.com/scraper/api/incidentHits/`, {
     headers: {
       Authorization: `Token ${localStorage.getItem('token')}`
+    },
+    params: {
+      days: '10'
     }
   });
 }
@@ -46,7 +49,7 @@ export function getIncidentHits() {
 // returns tracked/client locations for the user
 export function getClientLocations() {
   return axios.get(
-    `${apiUrl}/scraper/api/clientlocationlist`,
+    `${apiUrl}/scraper/api/clientlocationlist/`,
     {
       headers: {
         Authorization: `Token ${localStorage.getItem('token')}`
