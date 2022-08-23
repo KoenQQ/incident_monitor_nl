@@ -27,7 +27,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         #get data
-        URL = 'https://feeds.livep2000.nl/'
+        URL = 'https://m.livep2000.nl/'
+        # URL = 'https://feeds.livep2000.nl/'
+
         xml_data = rq.get(URL).content
 
         #convert to soup
