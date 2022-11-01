@@ -39,3 +39,5 @@ class Command(BaseCommand):
 
         # start dataframe
         incidents_data = pd.DataFrame() 
+
+
