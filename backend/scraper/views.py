@@ -118,7 +118,7 @@ class NearbyIncidents(viewsets.ModelViewSet):
         #date
         # dateRange = self.request.GET.get('dateRange')
         # I added a fixed daterange here so even without new inputs we can show results. 
-        dateRange = 700
+        dateRange = 800
         dateRange = int(dateRange)
 
         #location 

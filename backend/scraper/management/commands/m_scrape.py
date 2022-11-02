@@ -14,7 +14,7 @@ from django.contrib.gis.geos import fromstr
 from scraper.models import Incidents
 import zlib
 
-
+#test command, see if I can pull in new data sourcee
 class Command(BaseCommand):
     """custom commandline command that scrapes
         title, description and more from MOBILE livep2000 website and pushes
@@ -30,14 +30,17 @@ class Command(BaseCommand):
         # URL = 'https://feeds.livep2000.nl/'
 
         xml_data = rq.get(URL).content
-
+        print(xml_data)
         #convert to soup
-        soup = BeautifulSoup(xml_data,"html.parser")
+        # soup = BeautifulSoup(xml_data,"html.parser")
         
-        # grab all incidents, met toebehoren
-        incident_messages = soup.find_all("item")
+        # # grab all incidents, met toebehoren
+        # incident_messages = soup.find_all("item")
 
-        # start dataframe
-        incidents_data = pd.DataFrame() 
+        # # start dataframe
+        # incidents_data = pd.DataFrame() 
 
 
+#binnentrekken
+# in df zetten. 
+# print
